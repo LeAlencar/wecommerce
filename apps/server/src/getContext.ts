@@ -12,7 +12,7 @@ type ContextVars = {
   setCookie: (cookieName: string, token: string) => void;
 };
 
-export const getContext = async (ctx: ContextVars) => {
+export const getContext = async (ctx: Record<string, unknown>) => {
   const context = {
     ...ctx
   };

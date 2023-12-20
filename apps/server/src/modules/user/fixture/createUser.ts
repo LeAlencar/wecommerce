@@ -1,5 +1,5 @@
 import User from '../UserModel';
-import { getCounter } from '../../../../test';
+import { getCounter } from '@wecommerce/test';
 
 export const createUser = () => {
   const i = getCounter('user');

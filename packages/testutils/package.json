@@ -1,0 +1,13 @@
+{
+  "name": "@wecommerce/test",
+  "version": "1.0.0",
+  "description": "wecommerce test package",
+  "main": "src/index.ts",
+  "author": "Leandro Alencar",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^29.5.2",
+    "@types/node": "^18.16.2"
+  },
+  "dependencies": {}
+}
