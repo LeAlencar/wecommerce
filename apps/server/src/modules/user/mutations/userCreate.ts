@@ -1,8 +1,8 @@
-import { GraphQLNonNull, GraphQLString } from 'graphql'
-import { mutationWithClientMutationId } from 'graphql-relay'
-import bcrypt from 'bcryptjs'
-import UserModel from '../UserModel'
-import { generateJwtToken } from '../../../auth'
+import { GraphQLNonNull, GraphQLString } from 'graphql';
+import { mutationWithClientMutationId } from 'graphql-relay';
+import bcrypt from 'bcryptjs';
+import UserModel from '../UserModel';
+import { generateJwtToken } from '../../../auth';
 
 export default mutationWithClientMutationId({
   name: 'UserRegister',
@@ -20,30 +20,30 @@ export default mutationWithClientMutationId({
   mutateAndGetPayload: async ({ username, email, password }, context) => {
     const userExists = await UserModel.findOne({
       email: email.trim().toLowerCase()
-    })
+    });
 
     if (userExists) {
       return {
         error: 'User already exists'
-      }
+      };
     }
 
-    const hashPassword = bcrypt.hashSync(password, 8)
+    const hashPassword = bcrypt.hashSync(password, 8);
 
     const user = await new UserModel({
       username,
       email,
       password: hashPassword
-    }).save()
+    }).save();
 
-    const token = generateJwtToken(user._id)
+    const token = generateJwtToken(user._id);
 
-    context.setCookie('userToken', token)
+    context.setCookie('userToken', token);
 
     return {
       user: user._id,
       error: null
-    }
+    };
   },
   outputFields: {
     token: {
@@ -55,4 +55,4 @@ export default mutationWithClientMutationId({
       resolve: ({ error }) => error
     }
   }
-})
+});

@@ -1,7 +1,7 @@
-import { GraphQLString, GraphQLNonNull, GraphQLObjectType } from 'graphql'
-import { connectionDefinitions, globalIdField } from 'graphql-relay'
-import { registerTypeLoader, nodeInterface } from '../node/typeRegister'
-import { load } from './UserLoader'
+import { GraphQLString, GraphQLNonNull, GraphQLObjectType } from 'graphql';
+import { connectionDefinitions, globalIdField } from 'graphql-relay';
+import { registerTypeLoader, nodeInterface } from '../node/typeRegister';
+import { load } from './UserLoader';
 
 export const UserType = new GraphQLObjectType({
   name: 'User',
@@ -20,12 +20,12 @@ export const UserType = new GraphQLObjectType({
       resolve: (user) => user.email
     }
   })
-})
+});
 
-registerTypeLoader(UserType, load)
+registerTypeLoader(UserType, load);
 
 export const { connectionType: UserConnection, edgeType: UserEdge } =
   connectionDefinitions({
     name: 'User',
     nodeType: UserType
-  })
+  });

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { GraphQLObjectType } from "graphql";
-import { fromGlobalId, nodeDefinitions } from "graphql-relay";
-import { GraphQLContext } from "../../types/types";
+import { GraphQLObjectType } from 'graphql';
+import { fromGlobalId, nodeDefinitions } from 'graphql-relay';
+import { GraphQLContext } from '../../types/types';
 
 type Load = (context: GraphQLContext, id: string) => any;
 
@@ -19,7 +19,7 @@ const getTypeRegister = () => {
   const registerTypeLoader = (type: GraphQLObjectType, load: Load) => {
     typesLoaders[type.name] = {
       type,
-      load,
+      load
     };
     return type;
   };
@@ -44,7 +44,7 @@ const getTypeRegister = () => {
     getTypesLoaders,
     nodeField,
     nodesField,
-    nodeInterface,
+    nodeInterface
   };
 };
 

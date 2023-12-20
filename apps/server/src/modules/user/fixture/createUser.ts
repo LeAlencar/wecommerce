@@ -7,6 +7,6 @@ export const createUser = () => {
   return new User({
     username: `user#${i}`,
     email: `user${i}@example.com`,
-    password: `pass${i}`,
+    password: `pass${i}`
   }).save();
 };
