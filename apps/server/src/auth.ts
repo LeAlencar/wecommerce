@@ -11,8 +11,6 @@ export const getUser = async (token: string | null | undefined) => {
       jwtSecret
     );
 
-    console.log(decodedToken);
-
     const user = await UserModel.findOne({
       _id: (decodedToken as { id: string }).id
     });
