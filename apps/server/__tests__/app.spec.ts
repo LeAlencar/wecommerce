@@ -3,7 +3,9 @@ import request from 'supertest';
 import {
   clearDbAndRestartCounters,
   connectMongoose,
-  disconnectMongoose
+  defaultFrozenKeys,
+  disconnectMongoose,
+  sanitizeTestObject
 } from '@wecommerce/test';
 import { createUser } from '../src/modules/user/fixture/createUser';
 import { generateJwtToken } from '../src/auth';
@@ -50,4 +52,7 @@ it('should return 200 and return logged user', async () => {
 
   expect(result.data.me.id).toBeTruthy();
   expect(result.data.me.username).toBeTruthy();
+  expect(
+    sanitizeTestObject(result.data, [...defaultFrozenKeys])
+  ).toMatchSnapshot();
 });
