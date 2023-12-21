@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should create an product 1`] = `
+{
+  "ProductAddMutation": {
+    "error": "EMPTY",
+    "productEdge": {
+      "cursor": "FROZEN-CURSOR",
+      "node": {
+        "id": "FROZEN-ID",
+        "name": "awesome-product",
+      },
+    },
+  },
+}
+`;

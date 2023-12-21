@@ -1,5 +1,5 @@
-import { fromGlobalId } from 'graphql-relay';
-import mongoose from 'mongoose';
+import { fromGlobalId } from "graphql-relay";
+import mongoose from "mongoose";
 
 const { ObjectId } = mongoose.Types;
 
@@ -21,16 +21,16 @@ export const sanitizeValue = (
   field: string | null,
   keys: string[],
   ignore: string[] = [],
-  jsonKeys: string[] = [],
+  jsonKeys: string[] = []
 ): Value => {
   // If value is empty, return `EMPTY` value so it's easier to debug
   // Check if value is boolean
-  if (typeof value === 'boolean') {
+  if (typeof value === "boolean") {
     return value;
   }
 
   if (!value && value !== 0) {
-    return 'EMPTY';
+    return "EMPTY";
   }
   // If this current field is specified on the `keys` array, we simply redefine it
   // so it stays the same on the snapshot
@@ -47,7 +47,7 @@ export const sanitizeValue = (
   // if it's an array, sanitize the field
   if (Array.isArray(value)) {
     // normalize CoreMongooseArray to simple array to avoid breaking snapshot
-    if ('isMongooseArray' in value && value.isMongooseArray) {
+    if ("isMongooseArray" in value && value.isMongooseArray) {
       const simpleArray = value.toObject();
 
       return simpleArray.map((item) => sanitizeValue(item, null, keys, ignore));
@@ -57,16 +57,16 @@ export const sanitizeValue = (
   }
 
   // Check if it's not an array and can be transformed into a string
-  if (!Array.isArray(value) && typeof value.toString === 'function') {
+  if (!Array.isArray(value) && typeof value.toString === "function") {
     // Remove any non-alphanumeric character from value
-    const cleanValue = value.toString().replace(/[^a-z0-9]/gi, '');
+    const cleanValue = value.toString().replace(/[^a-z0-9]/gi, "");
 
     // Check if it's a valid `ObjectId`, if so, replace it with a static value
     if (
       ObjectId.isValid(cleanValue) &&
       value.toString().indexOf(cleanValue) !== -1
     ) {
-      return value.toString().replace(cleanValue, 'ObjectId');
+      return value.toString().replace(cleanValue, "ObjectId");
     }
 
     if (value.constructor === Date) {
@@ -76,19 +76,19 @@ export const sanitizeValue = (
     }
 
     // If it's an object, we call sanitizeTestObject function again to handle nested fields
-    if (typeof value === 'object') {
+    if (typeof value === "object") {
       return sanitizeTestObject(value, keys, ignore, jsonKeys);
     }
 
     // Check if it's a valid globalId, if so, replace it with a static value
     const result = fromGlobalId(cleanValue);
     if (result.type && result.id && ObjectId.isValid(result.id)) {
-      return 'GlobalID';
+      return "GlobalID";
     }
   }
 
   // If it's an object, we call sanitizeTestObject function again to handle nested fields
-  if (typeof value === 'object') {
+  if (typeof value === "object") {
     return sanitizeTestObject(value, keys, ignore, jsonKeys);
   }
 
@@ -96,11 +96,12 @@ export const sanitizeValue = (
 };
 
 export const defaultFrozenKeys = [
-  'id',
-  'createdAt',
-  'updatedAt',
-  'password',
-  'checksum',
+  "id",
+  "cursor",
+  "createdAt",
+  "updatedAt",
+  "password",
+  "checksum",
 ];
 
 /**
@@ -114,7 +115,7 @@ export const sanitizeTestObject = (
   payload: Value,
   keys = defaultFrozenKeys,
   ignore: string[] = [],
-  jsonKeys: string[] = [],
+  jsonKeys: string[] = []
 ) =>
   // TODO - treat array as arrays
   payload &&

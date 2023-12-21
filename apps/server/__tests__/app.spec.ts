@@ -1,5 +1,3 @@
-import request from 'supertest';
-
 import {
   clearDbAndRestartCounters,
   connectMongoose,
@@ -7,38 +5,20 @@ import {
   disconnectMongoose,
   sanitizeTestObject
 } from '@wecommerce/test';
-import { createUser } from '../src/modules/user/fixture/createUser';
-import { generateJwtToken } from '../src/auth';
-import app from '../src/app';
 import { getContext } from '../src/getContext';
 import { graphql } from 'graphql';
 import { schema } from '../src/schema/schema';
 
-beforeAll(connectMongoose);
-
-beforeEach(clearDbAndRestartCounters);
-
-afterAll(disconnectMongoose);
-
-it('should return 200 and return logged user', async () => {
-  const user = await createUser();
-  const token = generateJwtToken(user);
-
+it('should return 200 and show current version', async () => {
   const query = `
     query Q {
-      me {
-        id
-        username
-        email
-      }
+      version
     }
   `;
 
   const variables = {};
 
-  const context = await getContext({
-    user
-  });
+  const context = await getContext({});
 
   const rootValue = {};
 
@@ -50,8 +30,7 @@ it('should return 200 and return logged user', async () => {
     variableValues: variables
   });
 
-  expect(result.data.me.id).toBeTruthy();
-  expect(result.data.me.username).toBeTruthy();
+  expect(result.data?.version).toBeTruthy();
   expect(
     sanitizeTestObject(result.data, [...defaultFrozenKeys])
   ).toMatchSnapshot();
