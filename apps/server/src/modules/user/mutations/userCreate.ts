@@ -46,9 +46,9 @@ export default mutationWithClientMutationId({
     };
   },
   outputFields: {
-    token: {
+    user: {
       type: GraphQLString,
-      resolve: ({ token }) => token
+      resolve: ({ user }) => user
     },
     error: {
       type: GraphQLString,

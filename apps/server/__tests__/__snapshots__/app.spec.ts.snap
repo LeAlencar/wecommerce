@@ -1,11 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`should return 200 and return logged user 1`] = `
+exports[`should return 200 and show current version 1`] = `
 {
-  "me": {
-    "email": "user0@example.com",
-    "id": "FROZEN-ID",
-    "username": "user#0",
-  },
+  "version": "1.0.0",
 }
 `;

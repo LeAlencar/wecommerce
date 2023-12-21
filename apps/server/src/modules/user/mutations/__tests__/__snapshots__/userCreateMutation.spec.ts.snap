@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should create an user 1`] = `
+{
+  "userCreate": {
+    "error": "EMPTY",
+    "user": "ObjectId",
+  },
+}
+`;

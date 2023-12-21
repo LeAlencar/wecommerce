@@ -1,15 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export interface DataLoaders {
-  UserLoader: ReturnType<typeof import('../user/UserLoader').getLoader>;
+  UserLoader?: ReturnType<typeof import('../user/UserLoader').getLoader>;
+  ProductLoader?: ReturnType<
+    typeof import('../product/ProductLoader').getLoader
+  >;
 }
 
-const loaders: {
-  [Name in keyof DataLoaders]: () => DataLoaders[Name];
-} = {} as any;
+const loaders = {} as any;
 
-export const registerLoader = <Name extends keyof DataLoaders>(
-  key: Name,
-  getLoader: () => DataLoaders[Name]
+export const registerLoader = <T extends keyof DataLoaders>(
+  key: T,
+  getLoader: () => DataLoaders[T]
 ) => {
   loaders[key] = getLoader;
 };
