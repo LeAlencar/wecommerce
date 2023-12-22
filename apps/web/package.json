@@ -10,22 +10,28 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "next": "^14.0.3",
+    "@radix-ui/react-slot": "^1.0.2",
+    "@wecommerce/ui": "workspace:*",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.0.0",
+    "lucide-react": "^0.299.0",
+    "next": "^14.0.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "@repo/ui": "workspace:*"
+    "tailwind-merge": "^2.1.0",
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
-    "@next/eslint-plugin-next": "^14.0.3",
-    "@types/node": "^20.10.0",
-    "@types/react": "^18.2.38",
-    "@types/react-dom": "^18.2.17",
+    "@next/eslint-plugin-next": "^14.0.4",
+    "@types/node": "^20.10.5",
+    "@types/react": "^18.2.45",
+    "@types/react-dom": "^18.2.18",
+    "@wecommerce/eslint-config": "workspace:*",
+    "@wecommerce/tailwind-config": "workspace:*",
+    "@wecommerce/typescript-config": "workspace:*",
     "autoprefixer": "^10.4.16",
-    "@repo/eslint-config": "workspace:*",
-    "postcss": "^8.4.31",
-    "@repo/tailwind-config": "workspace:*",
-    "tailwindcss": "^3.3.5",
-    "@repo/typescript-config": "workspace:*",
-    "typescript": "^5.3.2"
+    "postcss": "^8.4.32",
+    "tailwindcss": "^3.4.0",
+    "typescript": "^5.3.3"
   }
 }
