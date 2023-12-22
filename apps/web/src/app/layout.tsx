@@ -1,5 +1,5 @@
 import "./globals.css";
-import "@wecommerce/ui/styles.css";
+import "@wecommerce/ui/src/globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 

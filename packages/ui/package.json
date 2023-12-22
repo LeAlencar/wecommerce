@@ -1,33 +1,39 @@
 {
   "name": "@wecommerce/ui",
   "version": "0.0.0",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
   "sideEffects": [
     "**/*.css"
   ],
-  "exports": {
-    "./styles.css": "./dist/index.css",
-    "./card": "./src/card.tsx"
-  },
   "license": "MIT",
   "scripts": {
-    "build": "tailwindcss -i ./src/styles.css -o dist/index.css",
+    "build": "tsc",
     "lint": "eslint src/",
-    "dev": "tailwindcss -i ./src/styles.css -o ./dist/index.css --watch",
+    "dev": "tailwindcss -i ./src/globals.css -o ./dist/index.css --watch",
     "type-check": "tsc --noEmit"
   },
   "peerDependencies": {
     "react": "^18.2.0"
   },
   "devDependencies": {
+    "@types/react": "^18.2.38",
     "@wecommerce/eslint-config": "workspace:*",
     "@wecommerce/tailwind-config": "workspace:*",
     "@wecommerce/typescript-config": "workspace:*",
-    "@types/react": "^18.2.38",
     "autoprefixer": "^10.4.16",
     "postcss": "^8.4.31",
     "react": "^18.2.0",
     "tailwindcss": "^3.3.5",
     "tsup": "^8.0.1",
     "typescript": "^5.3.2"
+  },
+  "dependencies": {
+    "@radix-ui/react-slot": "^1.0.2",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.0.0",
+    "lucide-react": "^0.299.0",
+    "tailwind-merge": "^2.1.0",
+    "tailwindcss-animate": "^1.0.7"
   }
 }
