@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 import {
+  Button,
   Form,
   FormControl,
   FormField,
@@ -16,7 +17,7 @@ import { useMutation } from "react-relay"
 import { useRouter } from "next/navigation"
 import { UserLogin } from "../mutations/LoginMutation"
 import type { LoginMutation } from "../mutations/__generated__/LoginMutation.graphql"
-import { Button } from "./Button"
+
 
 const formSchema = z.object({
   email: z.string().email({
@@ -49,9 +50,13 @@ export function LoginForm(): JSX.Element {
       },
       onCompleted: ({ userLogin }) => {
         if (userLogin?.me) {
-          router.push('/dashboard')
+          router.push('/')
         }
-      }
+      },
+      onError(error) {
+        console.log('deu ruim')
+        console.log(error)
+      },
     })
   }
 
@@ -84,7 +89,7 @@ export function LoginForm(): JSX.Element {
             </FormItem>
           )}
         />
-        <Button disabled={isPending} type="submit">
+        <Button type="submit">
           {isPending ? <svg className="animate-spin h-5 w-5 mr-3 ..." viewBox="0 0 24 24" /> : <p>Submit</p>}
         </Button>
       </form>

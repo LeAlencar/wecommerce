@@ -22,7 +22,7 @@ export async function networkFetch(
   variables: Variables,
   headers?: HeadersInit
 ): Promise<GraphQLResponse> {
-  const HTTP_ENDPOINT = process.env.SERVER_URL;
+  const HTTP_ENDPOINT = process.env.NEXT_PUBLIC_SERVER_URL;
   if (!HTTP_ENDPOINT) throw new Error("Server not found");
   const resp = await fetch(HTTP_ENDPOINT, {
     method: "POST",
