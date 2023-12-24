@@ -11,12 +11,12 @@ import {
   FormLabel,
   FormMessage,
   Input,
-  Button
 } from "@wecommerce/ui"
 import { useMutation } from "react-relay"
 import { useRouter } from "next/navigation"
 import { UserLogin } from "../mutations/LoginMutation"
 import type { LoginMutation } from "../mutations/__generated__/LoginMutation.graphql"
+import { Button } from "./Button"
 
 const formSchema = z.object({
   email: z.string().email({
@@ -84,7 +84,7 @@ export function LoginForm(): JSX.Element {
             </FormItem>
           )}
         />
-        <Button className="" disabled={isPending} type="submit">
+        <Button disabled={isPending} type="submit">
           {isPending ? <svg className="animate-spin h-5 w-5 mr-3 ..." viewBox="0 0 24 24" /> : <p>Submit</p>}
         </Button>
       </form>
