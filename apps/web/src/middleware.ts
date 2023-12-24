@@ -8,10 +8,16 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
 
+  if (
+    request.nextUrl.pathname.startsWith("/register") ||
+    request.nextUrl.pathname.startsWith("/login")
+  ) {
+    return NextResponse.redirect(new URL("/dashboard", request.url));
+  }
   return NextResponse.next();
 }
 
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: "/((?!api|_next/static|_next/image|favicon.ico|login).*)",
+  matcher: "/((?!api|_next/static|_next/image|favicon.ico).*)",
 };
