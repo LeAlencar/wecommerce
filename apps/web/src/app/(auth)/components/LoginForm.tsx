@@ -6,7 +6,6 @@ import * as z from "zod"
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -14,6 +13,10 @@ import {
   Input,
   Button
 } from "@wecommerce/ui"
+import { useMutation } from "react-relay"
+import { useRouter } from "next/navigation"
+import { UserLogin } from "../mutations/LoginMutation"
+import type { LoginMutation } from "../mutations/__generated__/LoginMutation.graphql"
 
 const formSchema = z.object({
   email: z.string().email({
@@ -22,7 +25,10 @@ const formSchema = z.object({
   password: z.string()
 })
 
+
+
 export function LoginForm(): JSX.Element {
+  const router = useRouter()
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -31,8 +37,22 @@ export function LoginForm(): JSX.Element {
     },
   })
 
+  const [login, isPending] = useMutation<LoginMutation>(UserLogin);
+
   function onSubmit(data: z.infer<typeof formSchema>) {
-    console.log('FOI PORRA', data)
+    login({
+      variables: {
+        input: {
+          email: data.email,
+          password: data.password
+        },
+      },
+      onCompleted: ({ userLogin }) => {
+        if (userLogin?.me) {
+          router.push('/dashboard')
+        }
+      }
+    })
   }
 
   return (
@@ -64,7 +84,9 @@ export function LoginForm(): JSX.Element {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <Button className="" disabled={isPending} type="submit">
+          {isPending ? <svg className="animate-spin h-5 w-5 mr-3 ..." viewBox="0 0 24 24" /> : <p>Submit</p>}
+        </Button>
       </form>
     </Form>
   )

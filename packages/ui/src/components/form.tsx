@@ -9,7 +9,7 @@ import type {
 import {
   Controller,
   FormProvider,
-  useFormContext,
+  useFormContext
 } from "react-hook-form"
 import { cn } from "../lib/utils";
 import { Label } from './label'

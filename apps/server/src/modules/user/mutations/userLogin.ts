@@ -29,7 +29,7 @@ export const userLogin = mutationWithClientMutationId({
     }
 
     const token = generateJwtToken(user._id);
-    context.setCookie('userToken', token);
+    await context.setCookie('userToken', token);
 
     return {
       token,
