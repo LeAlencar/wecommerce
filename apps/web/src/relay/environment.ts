@@ -14,7 +14,6 @@ import {
   QueryResponseCache,
 } from "relay-runtime";
 
-const HTTP_ENDPOINT = "http://localhost:3002/graphql";
 const IS_SERVER = typeof window === typeof undefined;
 const CACHE_TTL = 5 * 1000; // 5 seconds, to resolve preloaded results
 
@@ -23,6 +22,8 @@ export async function networkFetch(
   variables: Variables,
   headers?: HeadersInit
 ): Promise<GraphQLResponse> {
+  const HTTP_ENDPOINT = process.env.SERVER_URL;
+  if (!HTTP_ENDPOINT) throw new Error("Server not found");
   const resp = await fetch(HTTP_ENDPOINT, {
     method: "POST",
     credentials: "include",
@@ -71,9 +72,9 @@ function createNetwork() {
     const isQuery = params.operationKind === "query";
     const cacheKey = params.id ?? params.cacheID;
     const forceFetch = cacheConfig.force;
-    if (responseCache != null && isQuery && !forceFetch) {
+    if (responseCache !== null && isQuery && !forceFetch) {
       const fromCache = responseCache.get(cacheKey, variables);
-      if (fromCache != null) {
+      if (fromCache !== null) {
         return Promise.resolve(fromCache);
       }
     }
@@ -108,8 +109,8 @@ export async function getPreloadedQuery(
   variables: Variables,
   ctx: GetServerSidePropsContext<any>
 ) {
-  const headers = {
-    Cookie: ctx.req.headers.cookie,
+  const headers: HeadersInit = {
+    Cookie: ctx.req.headers.cookie!,
   };
 
   const response = await networkFetch(params, variables, headers);

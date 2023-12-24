@@ -38,7 +38,7 @@ export function RegisterForm(): JSX.Element {
   })
 
   function onSubmit(data: z.infer<typeof formSchema>) {
-    console.log('FOI PORRA', data)
+    console.log(data)
   }
 
   return (
