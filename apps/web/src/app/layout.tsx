@@ -15,6 +15,7 @@ export default function RootLayout({
 }): JSX.Element {
   const environment = getCurrentEnvironment()
 
+
   return (
     <html lang="en">
       <body className={inter.className}>
