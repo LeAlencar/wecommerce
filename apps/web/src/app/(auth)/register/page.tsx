@@ -1,3 +1,4 @@
+'use client'
 import Link from "next/link"
 import { cn } from "@wecommerce/ui/src/lib/utils"
 import { buttonVariants } from "@wecommerce/ui/src/components/button"

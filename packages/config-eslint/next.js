@@ -44,5 +44,6 @@ module.exports = {
     "@typescript-eslint/no-misused-promises": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
     "unicorn/filename-case": "off",
+    "relay/generated-flow-types": "off",
   },
 };

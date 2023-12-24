@@ -49,17 +49,15 @@ app.use(
 );
 
 export const setCookie =
-  (context: Context) => (cookieName: string, token: string) => {
-    const options = {
+  (context: Context) => async (cookieName: string, token: string) => {
+    context.cookies.set(cookieName, token, {
       domain: undefined,
       httpOnly: true,
       secure: false,
       sameSite: 'lax',
       path: '/',
       maxAge: 365 * 24 * 60 * 60 * 100
-    };
-
-    context.cookies.set(cookieName, token, options);
+    });
   };
 
 router.get('/status', statusMiddleware);
@@ -98,7 +96,7 @@ router.all('/graphql', async (ctx) => {
         return getContext({
           req: request,
           user,
-          koaContext: ctx,
+          koaContext: ctx as Context,
           setCookie: setCookie(ctx)
         });
       }

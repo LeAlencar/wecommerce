@@ -1,0 +1,141 @@
+"""Exposes a URL that specifies the behavior of this scalar."""
+directive @specifiedBy(
+  """The URL that specifies the behavior of this scalar."""
+  url: String!
+) on SCALAR
+
+"""Root of ... mutations"""
+type Mutation {
+  userCreate(input: UserRegisterInput!): UserRegisterPayload
+  userLogin(input: UserLoginInput!): UserLoginPayload
+
+  """add a new product"""
+  ProductAddMutation(input: ProductAddInput!): ProductAddPayload
+}
+
+"""An object with an ID"""
+interface Node {
+  """The id of the object."""
+  id: ID!
+}
+
+"""Information about pagination in a connection."""
+type PageInfo {
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+}
+
+"""Product type"""
+type Product implements Node {
+  """The ID of an object"""
+  id: ID!
+
+  """Product's name"""
+  name: String!
+
+  """Product's displayName"""
+  displayName: String!
+
+  """Product's description"""
+  description: String!
+
+  """Product's price"""
+  price: Int!
+}
+
+input ProductAddInput {
+  name: String!
+  displayName: String!
+  description: String!
+  price: Int!
+  clientMutationId: String
+}
+
+type ProductAddPayload {
+  productEdge: ProductEdge
+  error: String
+  clientMutationId: String
+}
+
+"""A connection to a list of items."""
+type ProductConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [ProductEdge]
+}
+
+"""An edge in a connection."""
+type ProductEdge {
+  """The item at the end of the edge"""
+  node: Product
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+"""The root of all queries"""
+type Query {
+  """Fetches an object given its ID"""
+  node(
+    """The ID of an object"""
+    id: ID!
+  ): Node
+
+  """Fetches objects given their IDs"""
+  nodes(
+    """The IDs of objects"""
+    ids: [ID!]!
+  ): [Node]!
+  products(after: String, first: Int, before: String, last: Int): ProductConnection!
+  me: User
+  version: String
+}
+
+"""User type"""
+type User implements Node {
+  """The ID of an object"""
+  id: ID!
+
+  """User's username"""
+  username: String!
+
+  """User's email"""
+  email: String!
+}
+
+input UserLoginInput {
+  email: String!
+  password: String!
+  clientMutationId: String
+}
+
+type UserLoginPayload {
+  token: String
+  me: User
+  clientMutationId: String
+}
+
+input UserRegisterInput {
+  username: String!
+  email: String!
+  password: String!
+  clientMutationId: String
+}
+
+type UserRegisterPayload {
+  user: String
+  error: String
+  clientMutationId: String
+}
+
