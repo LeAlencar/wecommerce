@@ -53,7 +53,7 @@ export const setCookie =
     context.cookies.set(cookieName, token, {
       domain: undefined,
       httpOnly: false,
-      secure: false,
+      secure: process.env.NODE_ENV == 'production' ? true : false,
       sameSite: process.env.NODE_ENV == 'production' ? 'none' : 'lax',
       path: '/',
       maxAge: 365 * 24 * 60 * 60 * 100
