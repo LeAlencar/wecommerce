@@ -56,7 +56,7 @@ export const setCookie =
           ? 'https://wecommerce-web.vercel.app'
           : undefined,
       httpOnly: true,
-      secure: process.env.NODE_ENV == 'production' ? true : false,
+      secure: false,
       sameSite: process.env.NODE_ENV == 'production' ? 'lax' : 'none',
       path: '/',
       maxAge: 365 * 24 * 60 * 60 * 100
