@@ -127,6 +127,9 @@ importers:
       dataloader:
         specifier: ^2.2.2
         version: 2.2.2
+      dotenv-safe:
+        specifier: ^8.2.0
+        version: 8.2.0
       esbuild:
         specifier: ^0.19.10
         version: 0.19.10
@@ -188,9 +191,6 @@ importers:
       babel-jest:
         specifier: ^29.7.0
         version: 29.7.0(@babel/core@7.23.6)
-      dotenv-safe:
-        specifier: ^8.2.0
-        version: 8.2.0
       eslint:
         specifier: ^8.56.0
         version: 8.56.0
@@ -4421,7 +4421,7 @@ packages:
     resolution: {integrity: sha512-uWwWWdUQkSs5a3mySDB22UtNwyEYi0JtEQu+vDzIqr9OjbDdC2Ip13PnSpi/fctqlYmzkxCeabiyCAOROuAIaA==}
     dependencies:
       dotenv: 8.6.0
-    dev: true
+    dev: false
 
   /dotenv@16.0.3:
     resolution: {integrity: sha512-7GO6HghkA5fYG9TYnNxi14/7K9f5occMlp3zXAuSxn7CKCxt9xbNWG7yF8hTCSUchlfWSe3uLmlPfigevRItzQ==}
@@ -4431,7 +4431,6 @@ packages:
   /dotenv@8.6.0:
     resolution: {integrity: sha512-IrPdXQsk2BbzvCBGBOTmmSH5SodmqZNt4ERAZDmW4CT+tL8VtvinqywuANaFu4bOMWki16nqf0e4oC0QIaDr/g==}
     engines: {node: '>=10'}
-    dev: true
 
   /dynamic-dedupe@0.3.0:
     resolution: {integrity: sha512-ssuANeD+z97meYOqd50e04Ze5qp4bPqo8cCkI4TRjZkzAUgIDTrXV1R8QCdINpiI+hw14+rYazvTRdQrz0/rFQ==}

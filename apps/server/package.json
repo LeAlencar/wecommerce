@@ -27,7 +27,8 @@
     "koa-bodyparser": "^4.4.1",
     "koa-logger": "^3.2.1",
     "mongoose": "^8.0.3",
-    "esbuild": "^0.19.10"
+    "esbuild": "^0.19.10",
+    "dotenv-safe": "^8.2.0"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
@@ -40,7 +41,6 @@
     "@types/koa__cors": "^4.0.3",
     "@types/koa__router": "^12.0.4",
     "babel-jest": "^29.7.0",
-    "dotenv-safe": "^8.2.0",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.1.0",
