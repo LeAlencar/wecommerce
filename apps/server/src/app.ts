@@ -55,9 +55,9 @@ export const setCookie =
         process.env.NODE_ENV == 'production'
           ? 'https://wecommerce-api.onrender.com'
           : undefined,
-      httpOnly: true,
+      httpOnly: false,
       secure: false,
-      sameSite: process.env.NODE_ENV == 'production' ? 'lax' : 'none',
+      sameSite: process.env.NODE_ENV == 'production' ? 'none' : 'lax',
       path: '/',
       maxAge: 365 * 24 * 60 * 60 * 100
     });
