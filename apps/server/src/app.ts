@@ -53,7 +53,7 @@ export const setCookie =
     context.cookies.set(cookieName, token, {
       domain:
         process.env.NODE_ENV == 'production'
-          ? 'https://wecommerce-web.vercel.app'
+          ? 'https://wecommerce-api.onrender.com'
           : undefined,
       httpOnly: true,
       secure: false,
