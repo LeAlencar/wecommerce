@@ -51,10 +51,7 @@ app.use(
 export const setCookie =
   (context: Context) => async (cookieName: string, token: string) => {
     context.cookies.set(cookieName, token, {
-      domain:
-        process.env.NODE_ENV == 'production'
-          ? 'https://wecommerce-api.onrender.com'
-          : undefined,
+      domain: undefined,
       httpOnly: false,
       secure: false,
       sameSite: process.env.NODE_ENV == 'production' ? 'none' : 'lax',
