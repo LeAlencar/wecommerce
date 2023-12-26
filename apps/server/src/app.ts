@@ -51,10 +51,13 @@ app.use(
 export const setCookie =
   (context: Context) => async (cookieName: string, token: string) => {
     context.cookies.set(cookieName, token, {
-      domain: undefined,
+      domain:
+        process.env.NODE_ENV == 'production'
+          ? 'https://wecommerce-web.vercel.app'
+          : undefined,
       httpOnly: true,
-      secure: false,
-      sameSite: 'lax',
+      secure: process.env.NODE_ENV == 'production' ? true : false,
+      sameSite: process.env.NODE_ENV == 'production' ? 'lax' : 'none',
       path: '/',
       maxAge: 365 * 24 * 60 * 60 * 100
     });
