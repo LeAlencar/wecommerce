@@ -1,7 +1,7 @@
 import Link from "next/link"
-import { cn } from "@wecommerce/ui/src/lib/utils"
-import { buttonVariants } from "@wecommerce/ui/src/components/button"
-import { LoginForm } from "../components/LoginForm"
+import { LoginForm } from "../../../components/LoginForm"
+import { cn } from "../../../lib/utils"
+import { buttonVariants } from "../../../components/ui/button"
 
 export default function LoginPage(): JSX.Element {
   return (

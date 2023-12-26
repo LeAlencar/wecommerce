@@ -3,17 +3,13 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-  Input,
-  Button
-} from "@wecommerce/ui"
+import { useMutation } from "react-relay"
+import { useRouter } from "next/navigation"
+import type { RegisterMutation } from "../app/(auth)/mutations/__generated__/RegisterMutation.graphql"
+import { RegisterUser } from "../app/(auth)/mutations/RegisterMutation"
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "./ui/form"
+import { Button } from "./ui/button"
+import { Input } from "./ui/input"
 
 const formSchema = z.object({
   username: z.string().min(5, {
@@ -28,6 +24,7 @@ const formSchema = z.object({
 })
 
 export function RegisterForm(): JSX.Element {
+  const router = useRouter()
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -37,8 +34,25 @@ export function RegisterForm(): JSX.Element {
     },
   })
 
+  const [register, isPending] = useMutation<RegisterMutation>(RegisterUser);
+
   function onSubmit(data: z.infer<typeof formSchema>) {
-    console.log(data)
+    register({
+      variables: {
+        input: {
+          ...data
+        }
+      },
+      onCompleted({ userCreate }) {
+        if (userCreate?.user) {
+          router.push('/');
+        }
+        console.log(userCreate?.error)
+      },
+      onError(error) {
+        console.log(error)
+      },
+    })
   }
 
   return (
@@ -86,7 +100,9 @@ export function RegisterForm(): JSX.Element {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <Button type="submit">
+          {isPending ? <svg className="animate-spin h-5 w-5 mr-3 ..." viewBox="0 0 24 24" /> : <p>Register</p>}
+        </Button>
       </form>
     </Form>
   )

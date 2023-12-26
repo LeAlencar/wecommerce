@@ -1,8 +1,8 @@
 'use client'
 import Link from "next/link"
-import { cn } from "@wecommerce/ui/src/lib/utils"
-import { buttonVariants } from "@wecommerce/ui/src/components/button"
-import { RegisterForm } from "../components/RegisterForm"
+import { RegisterForm } from "../../../components/RegisterForm"
+import { cn } from "../../../lib/utils"
+import { buttonVariants } from "../../../components/ui/button"
 
 export default function RegisterPage(): JSX.Element {
   return (

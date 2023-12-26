@@ -3,20 +3,13 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
-import {
-  Button,
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-  Input,
-} from "@wecommerce/ui"
 import { useMutation } from "react-relay"
 import { useRouter } from "next/navigation"
-import { UserLogin } from "../mutations/LoginMutation"
-import type { LoginMutation } from "../mutations/__generated__/LoginMutation.graphql"
+import { UserLogin } from "../app/(auth)/mutations/LoginMutation"
+import type { LoginMutation } from "../app/(auth)/mutations/__generated__/LoginMutation.graphql"
+import { Input } from "./ui/input"
+import { Button } from "./ui/button"
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "./ui/form"
 
 
 const formSchema = z.object({
