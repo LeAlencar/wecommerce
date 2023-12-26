@@ -1,6 +1,5 @@
 'use client'
 import "./globals.css";
-import "@wecommerce/ui/src/globals.css";
 import { Inter } from "next/font/google";
 import type { ReactNode } from "react";
 import { RelayEnvironmentProvider } from "react-relay";
@@ -18,12 +17,12 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <RelayEnvironmentProvider environment={environment}>
-          {children}
-        </RelayEnvironmentProvider>
-      </body>
+      <RelayEnvironmentProvider environment={environment}>
+        <body className={inter.className}>
 
+          {children}
+        </body>
+      </RelayEnvironmentProvider>
     </html>
   );
 }
