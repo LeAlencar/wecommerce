@@ -4,12 +4,13 @@ import UserModel, { IUser } from './modules/user/UserModel';
 
 export const getUser = async (token: string | null | undefined) => {
   if (!token) return { user: null };
-
+  console.log(token);
   try {
     const decodedToken = jwt.verify(
-      token?.replace('JWT', '').trim(),
+      token?.replace('JWT%20', '').trim(),
       jwtSecret
     );
+    console.log(decodedToken);
 
     const user = await UserModel.findOne({
       _id: (decodedToken as { id: string }).id
@@ -25,5 +26,5 @@ export const getUser = async (token: string | null | undefined) => {
 };
 
 export const generateJwtToken = (user: IUser) => {
-  return `JWT ${jwt.sign({ id: user._id }, `jwtsupersecreto`)}`;
+  return `JWT ${jwt.sign({ id: user._id }, jwtSecret)}`;
 };

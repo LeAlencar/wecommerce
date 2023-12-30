@@ -7,6 +7,7 @@ import { useMutation } from "react-relay"
 import { useRouter } from "next/navigation"
 import { UserLogin } from "../app/(auth)/mutations/LoginMutation"
 import type { LoginMutation } from "../app/(auth)/mutations/__generated__/LoginMutation.graphql"
+import { saveLoginCookie } from "../app/(auth)/actions/loginAction"
 import { Input } from "./ui/input"
 import { Button } from "./ui/button"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "./ui/form"
@@ -42,8 +43,8 @@ export function LoginForm(): JSX.Element {
         },
       },
       onCompleted: ({ userLogin }) => {
-        if (userLogin?.me) {
-          router.push('/')
+        if (userLogin?.me && userLogin.token) {
+          saveLoginCookie(userLogin.token).then(() => { router.push('/'); }).catch((err) => { console.log(err); })
         }
       },
       onError(error) {

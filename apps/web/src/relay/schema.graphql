@@ -1,54 +1,88 @@
-"""Exposes a URL that specifies the behavior of this scalar."""
+"""
+Exposes a URL that specifies the behavior of this scalar.
+"""
 directive @specifiedBy(
-  """The URL that specifies the behavior of this scalar."""
+  """
+  The URL that specifies the behavior of this scalar.
+  """
   url: String!
 ) on SCALAR
 
-"""Root of ... mutations"""
+"""
+Root of ... mutations
+"""
 type Mutation {
   userCreate(input: UserRegisterInput!): UserRegisterPayload
   userLogin(input: UserLoginInput!): UserLoginPayload
 
-  """add a new product"""
+  """
+  add a new product
+  """
   ProductAddMutation(input: ProductAddInput!): ProductAddPayload
 }
 
-"""An object with an ID"""
+"""
+An object with an ID
+"""
 interface Node {
-  """The id of the object."""
+  """
+  The id of the object.
+  """
   id: ID!
 }
 
-"""Information about pagination in a connection."""
+"""
+Information about pagination in a connection.
+"""
 type PageInfo {
-  """When paginating forwards, are there more items?"""
+  """
+  When paginating forwards, are there more items?
+  """
   hasNextPage: Boolean!
 
-  """When paginating backwards, are there more items?"""
+  """
+  When paginating backwards, are there more items?
+  """
   hasPreviousPage: Boolean!
 
-  """When paginating backwards, the cursor to continue."""
+  """
+  When paginating backwards, the cursor to continue.
+  """
   startCursor: String
 
-  """When paginating forwards, the cursor to continue."""
+  """
+  When paginating forwards, the cursor to continue.
+  """
   endCursor: String
 }
 
-"""Product type"""
+"""
+Product type
+"""
 type Product implements Node {
-  """The ID of an object"""
+  """
+  The ID of an object
+  """
   id: ID!
 
-  """Product's name"""
+  """
+  Product's name
+  """
   name: String!
 
-  """Product's displayName"""
+  """
+  Product's displayName
+  """
   displayName: String!
 
-  """Product's description"""
+  """
+  Product's description
+  """
   description: String!
 
-  """Product's price"""
+  """
+  Product's price
+  """
   price: Int!
 }
 
@@ -66,51 +100,86 @@ type ProductAddPayload {
   clientMutationId: String
 }
 
-"""A connection to a list of items."""
+"""
+A connection to a list of items.
+"""
 type ProductConnection {
-  """Information to aid in pagination."""
+  """
+  Information to aid in pagination.
+  """
   pageInfo: PageInfo!
 
-  """A list of edges."""
+  """
+  A list of edges.
+  """
   edges: [ProductEdge]
 }
 
-"""An edge in a connection."""
+"""
+An edge in a connection.
+"""
 type ProductEdge {
-  """The item at the end of the edge"""
-  node: Product
+  """
+  The item at the end of the edge
+  """
+  node: Product!
 
-  """A cursor for use in pagination"""
+  """
+  A cursor for use in pagination
+  """
   cursor: String!
 }
 
-"""The root of all queries"""
+"""
+The root of all queries
+"""
 type Query {
-  """Fetches an object given its ID"""
+  """
+  Fetches an object given its ID
+  """
   node(
-    """The ID of an object"""
+    """
+    The ID of an object
+    """
     id: ID!
   ): Node
 
-  """Fetches objects given their IDs"""
+  """
+  Fetches objects given their IDs
+  """
   nodes(
-    """The IDs of objects"""
+    """
+    The IDs of objects
+    """
     ids: [ID!]!
   ): [Node]!
-  products(after: String, first: Int, before: String, last: Int): ProductConnection!
+  products(
+    after: String
+    first: Int
+    before: String
+    last: Int
+  ): ProductConnection!
   me: User
   version: String
 }
 
-"""User type"""
+"""
+User type
+"""
 type User implements Node {
-  """The ID of an object"""
+  """
+  The ID of an object
+  """
   id: ID!
 
-  """User's username"""
+  """
+  User's username
+  """
   username: String!
 
-  """User's email"""
+  """
+  User's email
+  """
   email: String!
 }
 
@@ -138,4 +207,3 @@ type UserRegisterPayload {
   error: String
   clientMutationId: String
 }
-
