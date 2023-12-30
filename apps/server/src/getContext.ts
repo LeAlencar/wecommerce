@@ -4,6 +4,7 @@ import { getDataloaders } from './modules/loader/loaderRegister';
 import { GraphQLContext } from './types/types';
 import { Request as HelixRequest } from 'graphql-helix';
 import { load } from './modules/user/UserLoader';
+import getLogtailClient from './logtail';
 
 type ContextVars = {
   user?: IUser | null;
@@ -13,12 +14,16 @@ type ContextVars = {
 };
 
 export const getContext = async (ctx: Record<string, unknown>) => {
+  const LogtailClient = getLogtailClient();
+
   const context = {
     ...ctx
   };
+
   const dataloaders = getDataloaders();
 
   if (context.user) {
+    LogtailClient.info(`CONTEXT USER - ${context.user}`);
     context.user = await load({ ...context, dataloaders }, context.user._id);
   }
 

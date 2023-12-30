@@ -14,10 +14,13 @@ import koaPlayground from 'graphql-playground-middleware-koa';
 import { getContext } from './getContext';
 import { schema } from './schema/schema';
 import { getUser } from './auth';
+import * as Sentry from '@sentry/node';
+import getLogtailClient from './logtail';
 
 const app = new Koa();
 
 const router = new Router();
+const logtailClient = getLogtailClient();
 
 export const statusMiddleware = async (ctx: Record<string, unknown>) => {
   try {
@@ -34,9 +37,15 @@ export const statusMiddleware = async (ctx: Record<string, unknown>) => {
 
 app.use(bodyParser());
 
-app.on('error', async (err, ctx) => {
-  console.log(ctx);
-  console.log('Error while answering request', { error: err });
+Sentry.init({ dsn: 'https://<key>@sentry.io/<project>' });
+
+app.on('error', (err, ctx) => {
+  Sentry.withScope(function (scope) {
+    scope.addEventProcessor(function (event) {
+      return Sentry.Handlers.parseRequest(event, ctx.request);
+    });
+    Sentry.captureException(err);
+  });
 });
 
 app.use(koaLogger());
@@ -72,6 +81,7 @@ router.all(
 router.all('/graphql', async (ctx) => {
   const { user } = await getUser(ctx.cookies.get('userToken'));
 
+  logtailClient.info(`USER NA APP - ${user}`);
   const request = {
     body: ctx.request.body,
     headers: ctx.req.headers,
