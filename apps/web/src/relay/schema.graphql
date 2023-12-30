@@ -122,7 +122,7 @@ type ProductEdge {
   """
   The item at the end of the edge
   """
-  node: Product!
+  node: Product
 
   """
   A cursor for use in pagination
@@ -204,6 +204,7 @@ input UserRegisterInput {
 
 type UserRegisterPayload {
   user: String
+  token: String
   error: String
   clientMutationId: String
 }

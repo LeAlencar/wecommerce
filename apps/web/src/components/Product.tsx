@@ -1,13 +1,12 @@
-/* eslint-disable camelcase */
+
 import { graphql, useFragment } from "react-relay";
 import Link from "next/link";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "./ui/card";
-import type { Product_product$key } from "./__generated__/Product_product.graphql";
 import { Button } from "./ui/button";
 import DeleteProduct from "./DeleteProduct";
 
 
-export default function Product(props: { product: Product_product$key }) {
+export default function Product(props: { product: any }) {
   const product = useFragment(
     graphql`
       fragment Product_product on Product {

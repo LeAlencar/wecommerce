@@ -6,10 +6,7 @@ export const getUser = async (token: string | null | undefined) => {
   if (!token) return { user: null };
   console.log(token);
   try {
-    const decodedToken = jwt.verify(
-      token?.replace('JWT%20', '').trim(),
-      jwtSecret
-    );
+    const decodedToken = jwt.verify(token?.trim(), jwtSecret);
     console.log(decodedToken);
 
     const user = await UserModel.findOne({
@@ -26,5 +23,5 @@ export const getUser = async (token: string | null | undefined) => {
 };
 
 export const generateJwtToken = (user: IUser) => {
-  return `JWT ${jwt.sign({ id: user._id }, jwtSecret)}`;
+  return `${jwt.sign({ id: user._id }, jwtSecret)}`;
 };

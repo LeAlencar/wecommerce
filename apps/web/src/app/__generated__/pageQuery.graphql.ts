@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<b33a9264893f1122d4266573234a5188>>
+ * @generated SignedSource<<e91feaa9db9df66397dd48cf14e54bd6>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -17,7 +17,7 @@ export type pageQuery$data = {
       readonly cursor: string;
       readonly node: {
         readonly " $fragmentSpreads": FragmentRefs<"Product_product">;
-      };
+      } | null | undefined;
     } | null | undefined> | null | undefined;
   };
 };
