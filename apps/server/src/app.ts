@@ -67,6 +67,8 @@ router.all(
 );
 
 router.all('/graphql', async (ctx) => {
+  const userToken = ctx.cookies.get('userToken');
+  logtailClient.info(`COOKIES - ${userToken}`);
   const { user } = await getUser(ctx.cookies.get('userToken'));
 
   logtailClient.info(`USER NA APP - ${user}`);
