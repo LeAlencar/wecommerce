@@ -14,7 +14,6 @@ import koaPlayground from 'graphql-playground-middleware-koa';
 import { getContext } from './getContext';
 import { schema } from './schema/schema';
 import { getUser } from './auth';
-import * as Sentry from '@sentry/node';
 import getLogtailClient from './logtail';
 
 const app = new Koa();
@@ -36,17 +35,6 @@ export const statusMiddleware = async (ctx: Record<string, unknown>) => {
 };
 
 app.use(bodyParser());
-
-Sentry.init({ dsn: 'https://<key>@sentry.io/<project>' });
-
-app.on('error', (err, ctx) => {
-  Sentry.withScope(function (scope) {
-    scope.addEventProcessor(function (event) {
-      return Sentry.Handlers.parseRequest(event, ctx.request);
-    });
-    Sentry.captureException(err);
-  });
-});
 
 app.use(koaLogger());
 app.use(
