@@ -20,13 +20,6 @@ export default function Product(props: { product: any }) {
     props.product
   )
 
-  /*
-  const connectionIDs = ConnectionHandler.getConnectionID(
-    ROOT_ID,
-    'TransactionList_transactions'
-  )
-  */
-
   return (
     <Card>
       <CardHeader>

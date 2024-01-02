@@ -1,12 +1,14 @@
-
-
 'use client'
 import { graphql, useLazyLoadQuery } from "react-relay";
 import { useEffect, useState } from "react";
+import type { ColumnDef } from "@tanstack/react-table";
 import Menu from "../components/Menu";
 import Product from "../components/Product";
+import { DataTable } from "../components/ProductTable";
 import { logOut } from "./(auth)/actions/logoutAction";
 import type { pageQuery, pageQuery$data } from "./__generated__/pageQuery.graphql";
+
+
 
 export default function Page(): JSX.Element {
   const response = useLazyLoadQuery<pageQuery>(
@@ -37,12 +39,14 @@ export default function Page(): JSX.Element {
     <>
       <Menu signOut={logOut} />
       <div className="mt-28 flex flex-col sm:flex-row justify-center gap-4">
-        {products?.products.edges?.map((edge) => {
-          if (!edge) return null
-          return (
-            <Product key={edge.cursor} product={edge.node} />
-          )
-        })}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+          {products?.products.edges?.map((edge) => {
+            if (!edge) return null
+            return (
+              <Product key={edge.cursor} product={edge.node} />
+            )
+          })}
+        </div>
       </div>
     </>
   );
