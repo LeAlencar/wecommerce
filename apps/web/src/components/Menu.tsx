@@ -4,6 +4,7 @@
 import { useRouter } from "next/navigation";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "./ui/dropdown-menu";
+import { CreateProductDialog } from "./CreateProduct";
 
 export default function Menu({ signOut }: { signOut: () => void }) {
   const router = useRouter()
@@ -14,6 +15,7 @@ export default function Menu({ signOut }: { signOut: () => void }) {
   return (
     <nav className="flex items-center justify-between flex-wrap bg-gray-800 p-6 fixed w-full z-10 top-0">
       <p className="text-white">Wecommerce Inc</p>
+      <CreateProductDialog />
       <DropdownMenu>
         <DropdownMenuTrigger>
           <Avatar>

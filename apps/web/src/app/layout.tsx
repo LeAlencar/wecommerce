@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import { type ReactNode } from "react";
 import { RelayEnvironmentProvider } from "react-relay";
 import { getCurrentEnvironment } from "../relay/environment";
+import { Toaster } from "../components/ui/sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,6 +22,7 @@ export default function RootLayout({
         <body className={`${inter.className} antialiased`}>
           {children}
         </body>
+        <Toaster />
       </RelayEnvironmentProvider>
     </html>
   );
