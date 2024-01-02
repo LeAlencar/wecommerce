@@ -1,10 +1,8 @@
 'use client'
 import { graphql, useLazyLoadQuery } from "react-relay";
 import { useEffect, useState } from "react";
-import type { ColumnDef } from "@tanstack/react-table";
 import Menu from "../components/Menu";
 import Product from "../components/Product";
-import { DataTable } from "../components/ProductTable";
 import { logOut } from "./(auth)/actions/logoutAction";
 import type { pageQuery, pageQuery$data } from "./__generated__/pageQuery.graphql";
 
