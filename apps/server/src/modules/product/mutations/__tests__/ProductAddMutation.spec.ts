@@ -61,8 +61,6 @@ it('should create an product', async () => {
     variableValues: variables
   });
 
-  console.log(result.data?.ProductAddMutation.productEdge);
-
   expect(result.data?.ProductAddMutation.productEdge).toBeTruthy();
   expect(result.data?.ProductAddMutation.productEdge.node.name).toEqual(
     'awesome-product'
