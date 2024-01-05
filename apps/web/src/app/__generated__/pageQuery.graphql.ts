@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<e91feaa9db9df66397dd48cf14e54bd6>>
+ * @generated SignedSource<<7b4ff91604254b04026ca6618a46b2b9>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -16,7 +16,7 @@ export type pageQuery$data = {
     readonly edges: ReadonlyArray<{
       readonly cursor: string;
       readonly node: {
-        readonly " $fragmentSpreads": FragmentRefs<"Product_product">;
+        readonly " $fragmentSpreads": FragmentRefs<"ProductFragment_product">;
       } | null | undefined;
     } | null | undefined> | null | undefined;
   };
@@ -108,7 +108,7 @@ return {
                   {
                     "args": null,
                     "kind": "FragmentSpread",
-                    "name": "Product_product"
+                    "name": "ProductFragment_product"
                   },
                   (v1/*: any*/)
                 ],
@@ -214,7 +214,7 @@ return {
     ]
   },
   "params": {
-    "cacheID": "4b776a8763f6d62afa8855e3baf7548b",
+    "cacheID": "7e5e9cf5471785dd5e265be6bc9b4453",
     "id": null,
     "metadata": {
       "connection": [
@@ -230,11 +230,11 @@ return {
     },
     "name": "pageQuery",
     "operationKind": "query",
-    "text": "query pageQuery {\n  products(first: 100) {\n    edges {\n      cursor\n      node {\n        ...Product_product\n        id\n        __typename\n      }\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment Product_product on Product {\n  id\n  name\n  price\n  displayName\n  description\n}\n"
+    "text": "query pageQuery {\n  products(first: 100) {\n    edges {\n      cursor\n      node {\n        ...ProductFragment_product\n        id\n        __typename\n      }\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment ProductFragment_product on Product {\n  id\n  name\n  price\n  displayName\n  description\n}\n"
   }
 };
 })();
 
-(node as any).hash = "6515e705cef908c8de78be468a7544a4";
+(node as any).hash = "bccffe767c16b0bc79fc839afa7281e0";
 
 export default node;

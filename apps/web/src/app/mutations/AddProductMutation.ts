@@ -5,7 +5,7 @@ export const AddProduct = graphql`
     ProductAddMutation(input: $input) {
       productEdge @prependEdge(connections: $connections) {
         node {
-          ...Product_product
+          ...ProductFragment_product
         }
         cursor
       }

@@ -15,5 +15,7 @@ module.exports = {
     "@typescript-eslint/prefer-ts-expect-error": "off",
     "no-console": "off",
     "relay/generated-flow-types": "off",
+    "relay/graphql-naming": "off",
+    camelcase: "off",
   },
 };
