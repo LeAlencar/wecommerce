@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<d29d824b359ce028d8f4a7f51eb9cff9>>
+ * @generated SignedSource<<c672d5a15e141402750fbbbed3f1ede9>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -27,7 +27,7 @@ export type AddProductMutation$data = {
     readonly productEdge: {
       readonly cursor: string;
       readonly node: {
-        readonly " $fragmentSpreads": FragmentRefs<"Product_product">;
+        readonly " $fragmentSpreads": FragmentRefs<"ProductFragment_product">;
       } | null | undefined;
     } | null | undefined;
   } | null | undefined;
@@ -106,7 +106,7 @@ return {
                   {
                     "args": null,
                     "kind": "FragmentSpread",
-                    "name": "Product_product"
+                    "name": "ProductFragment_product"
                   }
                 ],
                 "storageKey": null
@@ -221,16 +221,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "20d8ea4a847ac8bcc81df93f5bb43d21",
+    "cacheID": "61d0a9803f4d39923c4aa8c23a59eb38",
     "id": null,
     "metadata": {},
     "name": "AddProductMutation",
     "operationKind": "mutation",
-    "text": "mutation AddProductMutation(\n  $input: ProductAddInput!\n) {\n  ProductAddMutation(input: $input) {\n    productEdge {\n      node {\n        ...Product_product\n        id\n      }\n      cursor\n    }\n    error\n  }\n}\n\nfragment Product_product on Product {\n  id\n  name\n  price\n  displayName\n  description\n}\n"
+    "text": "mutation AddProductMutation(\n  $input: ProductAddInput!\n) {\n  ProductAddMutation(input: $input) {\n    productEdge {\n      node {\n        ...ProductFragment_product\n        id\n      }\n      cursor\n    }\n    error\n  }\n}\n\nfragment ProductFragment_product on Product {\n  id\n  name\n  price\n  displayName\n  description\n}\n"
   }
 };
 })();
 
-(node as any).hash = "dc2db085016f033d25a042440602eff2";
+(node as any).hash = "c98c7c4ff64df8e688bcdf8e591e2674";
 
 export default node;

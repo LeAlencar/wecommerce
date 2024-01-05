@@ -17,7 +17,7 @@ export default function Page(): JSX.Element {
           edges {
             cursor
             node {
-              ...Product_product
+              ...ProductFragment_product
             }
           }
         }

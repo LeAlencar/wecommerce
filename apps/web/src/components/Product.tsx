@@ -1,6 +1,7 @@
 
-import { graphql, useFragment } from "react-relay";
+import { useFragment } from "react-relay";
 import Link from "next/link";
+import { ProductFragment } from "../relay/ProductFragment";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "./ui/card";
 import { Button } from "./ui/button";
 import DeleteProduct from "./DeleteProduct";
@@ -8,15 +9,7 @@ import DeleteProduct from "./DeleteProduct";
 
 export default function Product(props: { product: any }) {
   const product = useFragment(
-    graphql`
-      fragment Product_product on Product {
-        id
-        name
-        price
-        displayName
-        description
-      }
-    `,
+    ProductFragment,
     props.product
   )
 
@@ -34,7 +27,7 @@ export default function Product(props: { product: any }) {
           <p>R${product.price / 100}</p>
           <div className="flex flex-row">
             <Button className="mt-5 gap-10">
-              <Link href={`/checkout/${product.id}`}>
+              <Link href={`/ ${product.id} / checkout`}>
                 Checkout Link
               </Link>
             </Button>
