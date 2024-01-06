@@ -48,10 +48,11 @@ app.use(
 export const setCookie =
   (context: Context) => async (cookieName: string, token: string) => {
     context.cookies.set(cookieName, token, {
-      domain: undefined,
-      httpOnly: false,
+      domain:
+        process.env.NODE_ENV === 'production' ? 'lealencar.dev' : undefined,
+      httpOnly: true,
       secure: process.env.NODE_ENV == 'production' ? true : false,
-      sameSite: process.env.NODE_ENV == 'production' ? 'none' : 'lax',
+      sameSite: 'lax',
       path: '/',
       maxAge: 365 * 24 * 60 * 60 * 100
     });
