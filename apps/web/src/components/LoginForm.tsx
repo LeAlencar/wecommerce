@@ -6,7 +6,6 @@ import * as z from "zod"
 import { useMutation } from "react-relay"
 import { useRouter } from "next/navigation"
 import { UserLogin } from "../app/mutations/LoginMutation"
-//import { saveLoginCookie } from "../app/(auth)/actions/loginAction"
 import type { LoginMutation } from "../app/mutations/__generated__/LoginMutation.graphql"
 import { Input } from "./ui/input"
 import { Button } from "./ui/button"
@@ -45,7 +44,6 @@ export function LoginForm(): JSX.Element {
       onCompleted: ({ userLogin }) => {
         if (userLogin?.me && userLogin.token) {
           router.push('/')
-          //saveLoginCookie(userLogin.token).then(() => { router.push('/'); }).catch((err) => { console.log(err); })
         }
       },
       onError(error) {

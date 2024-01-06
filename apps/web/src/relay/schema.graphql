@@ -14,6 +14,7 @@ Root of ... mutations
 type Mutation {
   userCreate(input: UserRegisterInput!): UserRegisterPayload
   userLogin(input: UserLoginInput!): UserLoginPayload
+  userLogout(input: UserLogoutInput!): UserLogoutPayload
 
   """
   add a new product
@@ -158,6 +159,7 @@ type Query {
     first: Int
     before: String
     last: Int
+    id: String
   ): ProductConnection!
   me: User
   version: String
@@ -192,6 +194,16 @@ input UserLoginInput {
 type UserLoginPayload {
   token: String
   me: User
+  clientMutationId: String
+}
+
+input UserLogoutInput {
+  clientMutationId: String
+}
+
+type UserLogoutPayload {
+  error: String
+  success: String
   clientMutationId: String
 }
 
