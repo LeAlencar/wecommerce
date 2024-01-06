@@ -4,10 +4,6 @@ import { useEffect, useState } from "react";
 import Menu from "../components/Menu";
 import Product from "../components/Product";
 import type { pageQuery, pageQuery$data } from "./__generated__/pageQuery.graphql";
-import { logOut } from "./(auth)/actions/logoutAction";
-
-
-
 
 export default function Page(): JSX.Element {
   const response = useLazyLoadQuery<pageQuery>(
@@ -36,11 +32,11 @@ export default function Page(): JSX.Element {
 
   return (
     <>
-      <Menu signOut={logOut} />
+      <Menu />
       <div className="mt-28 flex flex-col sm:flex-row justify-center gap-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
           {products?.products.edges?.map((edge) => {
-            if (!edge) return null
+            if (!edge?.node) return null
             return (
               <Product key={edge.cursor} product={edge.node} />
             )

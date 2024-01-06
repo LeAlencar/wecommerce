@@ -27,7 +27,7 @@ export default function CheckoutPage({ params }: { params: { productId: string }
         <p className="text-white">Wecommerce Inc.</p>
       </nav>
       <div className="flex justify-center mt-28">
-        <Card className="w-96 h-96 text-center h-auto">
+        <Card className="w-96 h-auto text-center">
           <CardHeader>
             <CardTitle>{product.displayName}</CardTitle>
             <CardDescription>{product.description}</CardDescription>

@@ -1,16 +1,31 @@
-/* eslint-disable @typescript-eslint/no-confusing-void-expression */
-/* eslint-disable @typescript-eslint/await-thenable */
+
+
 'use client'
 import { useRouter } from "next/navigation";
+import { useMutation } from "react-relay";
+import { UserLogout } from "../app/mutations/LogoutMutation";
+import type { LogoutMutation } from "../app/mutations/__generated__/LogoutMutation.graphql";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "./ui/dropdown-menu";
 import { CreateProductDialog } from "./CreateProduct";
 
-export default function Menu({ signOut }: { signOut: () => void }) {
+export default function Menu() {
   const router = useRouter()
-  const signOutSubmit = async () => {
-    await signOut();
-    await router.push('/login')
+  const [logout] = useMutation<LogoutMutation>(UserLogout);
+  const signOutSubmit = () => {
+    logout({
+      variables: {
+        input: {}
+      },
+      onCompleted({ userLogout }) {
+        if (userLogout?.success) {
+          router.push('/login')
+        }
+      },
+      onError(error) {
+        console.log(error)
+      },
+    })
   }
   return (
     <nav className="flex items-center justify-between flex-wrap bg-gray-800 p-6 fixed w-full z-10 top-0">
