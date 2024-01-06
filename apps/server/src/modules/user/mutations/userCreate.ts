@@ -17,7 +17,7 @@ export default mutationWithClientMutationId({
       type: new GraphQLNonNull(GraphQLString)
     }
   },
-  mutateAndGetPayload: async ({ username, email, password }) => {
+  mutateAndGetPayload: async ({ username, email, password }, context) => {
     const userExists = await UserModel.findOne({
       email: email.trim().toLowerCase()
     });
@@ -38,7 +38,7 @@ export default mutationWithClientMutationId({
 
     const token = generateJwtToken(user._id);
 
-    //context.setCookie('userToken', token);
+    context.setCookie('userToken', token);
 
     return {
       user: user._id,
