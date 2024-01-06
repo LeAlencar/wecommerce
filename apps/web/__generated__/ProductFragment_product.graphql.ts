@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<2dfccdecb4234837e6b94259f333a934>>
+ * @generated SignedSource<<96090b73970a21fbbb5d2af527c218e2>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -10,24 +10,24 @@
 
 import { Fragment, ReaderFragment } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
-export type page_checkout$data = {
+export type ProductFragment_product$data = {
   readonly description: string;
   readonly displayName: string;
   readonly id: string;
   readonly name: string;
   readonly price: number;
-  readonly " $fragmentType": "page_checkout";
+  readonly " $fragmentType": "ProductFragment_product";
 };
-export type page_checkout$key = {
-  readonly " $data"?: page_checkout$data;
-  readonly " $fragmentSpreads": FragmentRefs<"page_checkout">;
+export type ProductFragment_product$key = {
+  readonly " $data"?: ProductFragment_product$data;
+  readonly " $fragmentSpreads": FragmentRefs<"ProductFragment_product">;
 };
 
 const node: ReaderFragment = {
   "argumentDefinitions": [],
   "kind": "Fragment",
   "metadata": null,
-  "name": "page_checkout",
+  "name": "ProductFragment_product",
   "selections": [
     {
       "alias": null,
@@ -69,6 +69,6 @@ const node: ReaderFragment = {
   "abstractKey": null
 };
 
-(node as any).hash = "5318544f620fd07bf511bc2e399b7585";
+(node as any).hash = "840df8ea37cd3f818fe0caaf057d36f4";
 
 export default node;
