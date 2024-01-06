@@ -27,7 +27,7 @@ export default function Product(props: { product: any }) {
           <p>R${product.price / 100}</p>
           <div className="flex flex-row">
             <Button className="mt-5 gap-10">
-              <Link href={`/ ${product.id} / checkout`}>
+              <Link href={`/${product.id}/checkout`}>
                 Checkout Link
               </Link>
             </Button>
