@@ -51,7 +51,7 @@ export const setCookie =
       domain:
         process.env.NODE_ENV === 'production' ? 'lealencar.dev' : undefined,
       httpOnly: true,
-      secure: process.env.NODE_ENV == 'production' ? true : false,
+      secure: false,
       sameSite: 'lax',
       path: '/',
       maxAge: 365 * 24 * 60 * 60 * 100
