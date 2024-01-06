@@ -6,7 +6,7 @@ import { ProductFragment } from "../../../relay/ProductFragment";
 import type { ProductFragment_product$key } from "../../../relay/__generated__/ProductFragment_product.graphql";
 import { Label } from "../../../components/ui/label";
 import { Button } from "../../../components/ui/button";
-import type { CheckoutQuery as CheckoutQueryType } from "../../../../__generated__/CheckoutQuery.graphql";
+import type { CheckoutQuery as CheckoutQueryType } from "./__generated__/CheckoutQuery.graphql";
 import { CheckoutQuery } from "./CheckoutQuery"
 
 

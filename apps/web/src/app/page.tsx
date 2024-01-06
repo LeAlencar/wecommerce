@@ -3,8 +3,9 @@ import { graphql, useLazyLoadQuery } from "react-relay";
 import { useEffect, useState } from "react";
 import Menu from "../components/Menu";
 import Product from "../components/Product";
-import { logOut } from "./(auth)/actions/logoutAction";
 import type { pageQuery, pageQuery$data } from "./__generated__/pageQuery.graphql";
+import { logOut } from "./(auth)/actions/logoutAction";
+
 
 
 

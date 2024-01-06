@@ -5,7 +5,7 @@ import { ConnectionHandler, useMutation } from "react-relay";
 import { ROOT_ID } from "relay-runtime";
 import { toast } from "sonner";
 import { AddProduct } from "../app/mutations/AddProductMutation";
-import type { AddProductMutation } from "../../__generated__/AddProductMutation.graphql";
+import type { AddProductMutation } from "../app/mutations/__generated__/AddProductMutation.graphql";
 import { Button } from "./ui/button";
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "./ui/dialog";
 import { Input } from "./ui/input";
