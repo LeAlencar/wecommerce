@@ -20,6 +20,11 @@ type Mutation {
   add a new product
   """
   ProductAddMutation(input: ProductAddInput!): ProductAddPayload
+
+  """
+  dele a product
+  """
+  ProductDeleteMutation(input: ProductDeleteInput!): ProductDeletePayload
 }
 
 """
@@ -114,6 +119,18 @@ type ProductConnection {
   A list of edges.
   """
   edges: [ProductEdge]
+}
+
+input ProductDeleteInput {
+  id: String!
+  clientMutationId: String
+}
+
+type ProductDeletePayload {
+  productId: ID
+  error: String
+  success: String
+  clientMutationId: String
 }
 
 """
