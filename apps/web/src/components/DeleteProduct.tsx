@@ -1,6 +1,38 @@
+'use client'
+import { ConnectionHandler, useMutation } from "react-relay";
+import { ROOT_ID } from "relay-runtime";
+import { toast } from "sonner";
+import { DeleteProduct } from '../app/mutations/DeleteProductMutation'
+import type { DeleteProductMutation } from "../app/mutations/__generated__/DeleteProductMutation.graphql";
 import { AlertDialogHeader, AlertDialogTrigger, AlertDialogAction, AlertDialogTitle, AlertDialog, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, } from "./ui/alert-dialog";
 
-export default function DeleteProduct() {
+export default function DeleteProductAlert({ productId }: { productId: string }) {
+  const [deleteProduct] = useMutation<DeleteProductMutation>(DeleteProduct)
+  const connectionID = ConnectionHandler.getConnectionID(
+    ROOT_ID,
+    'ProductList_products'
+  )
+
+  const handleDelete = () => {
+    deleteProduct({
+      variables: {
+        connections: [connectionID],
+        input: {
+          id: productId
+        }
+      },
+      onCompleted(response) {
+        if (response.ProductDeleteMutation?.success) {
+          toast('Product deleted with success')
+          return
+        }
+
+        if (response.ProductDeleteMutation?.error) {
+          toast(response.ProductDeleteMutation.error)
+        }
+      },
+    })
+  }
   return (
     <div className="mt-5">
       <AlertDialog>
@@ -16,7 +48,7 @@ export default function DeleteProduct() {
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction className="bg-destructive">Continue</AlertDialogAction>
+            <AlertDialogAction className="bg-destructive" onClick={handleDelete}>Continue</AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>

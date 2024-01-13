@@ -1,4 +1,4 @@
-import { GraphQLNonNull, GraphQLString } from 'graphql';
+import { GraphQLID, GraphQLNonNull, GraphQLString } from 'graphql';
 import { fromGlobalId, mutationWithClientMutationId } from 'graphql-relay';
 import ProductModel from '../ProductModel';
 
@@ -27,11 +27,18 @@ export default mutationWithClientMutationId({
     });
 
     return {
+      id: id,
       success: 'product deleted successfully',
       error: null
     };
   },
   outputFields: {
+    productId: {
+      type: GraphQLID,
+      resolve: async ({ id }) => {
+        return id;
+      }
+    },
     error: {
       type: GraphQLString,
       resolve: ({ error }) => error

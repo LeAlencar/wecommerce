@@ -5,7 +5,7 @@ import { ProductFragment } from "../relay/ProductFragment";
 import type { ProductFragment_product$key } from "../relay/__generated__/ProductFragment_product.graphql";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "./ui/card";
 import { Button } from "./ui/button";
-import DeleteProduct from "./DeleteProduct";
+import DeleteProductAlert from "./DeleteProduct";
 
 
 export default function Product(props: { product: ProductFragment_product$key }) {
@@ -33,7 +33,7 @@ export default function Product(props: { product: ProductFragment_product$key })
               </Link>
             </Button>
           </div>
-          <DeleteProduct />
+          <DeleteProductAlert productId={product.id} />
         </div>
       </CardFooter>
     </Card>
