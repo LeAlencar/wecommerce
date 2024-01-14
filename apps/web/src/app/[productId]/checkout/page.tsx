@@ -60,7 +60,7 @@ export default function CheckoutPage({ params }: { params: { productId: string }
     },
   })
   function onSubmit(data: z.infer<typeof formSchema>) {
-    setPaymentIntent(data)
+    setPaymentIntent(true)
     console.log(data)
   }
   return (
