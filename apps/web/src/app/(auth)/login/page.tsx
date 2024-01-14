@@ -1,7 +1,7 @@
 import Link from "next/link"
-import { LoginForm } from "../../../components/LoginForm"
-import { cn } from "../../../lib/utils"
-import { buttonVariants } from "../../../components/ui/button"
+import { LoginForm } from "@/components/LoginForm"
+import { cn } from "@/lib/utils"
+import { buttonVariants } from "@/components/ui/button"
 
 export default function LoginPage(): JSX.Element {
   return (

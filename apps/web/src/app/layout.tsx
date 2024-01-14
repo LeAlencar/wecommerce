@@ -3,8 +3,8 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import { type ReactNode } from "react";
 import { RelayEnvironmentProvider } from "react-relay";
-import { getCurrentEnvironment } from "../relay/environment";
-import { Toaster } from "../components/ui/sonner";
+import { getCurrentEnvironment } from "@/relay/environment";
+import { Toaster } from "@/components/ui/sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 

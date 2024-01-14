@@ -1,8 +1,8 @@
 'use client'
 import { graphql, useLazyLoadQuery } from "react-relay";
 import { useEffect, useState } from "react";
-import Menu from "../components/Menu";
-import Product from "../components/Product";
+import Menu from "@/components/Menu";
+import Product from "@/components/Product";
 import type { pageQuery, pageQuery$data } from "./__generated__/pageQuery.graphql";
 
 export default function Page(): JSX.Element {

@@ -1,15 +1,15 @@
 'use client'
 import { graphql, useFragment, useLazyLoadQuery } from "react-relay"
 import QRCode from "react-qr-code";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../../../components/ui/card";
-import { ProductFragment } from "../../../relay/ProductFragment";
-import type { ProductFragment_product$key } from "../../../relay/__generated__/ProductFragment_product.graphql";
-import { Label } from "../../../components/ui/label";
-import { Button } from "../../../components/ui/button";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@components/ui/card";
+import { ProductFragment } from "@/relay/ProductFragment";
+import { Label } from "@components/ui/label";
+import { Button } from "@components/ui/button";
+import type { ProductFragment_product$key } from "@/relay/__generated__/ProductFragment_product.graphql";
 import type { CheckoutQuery as CheckoutQueryType } from "./__generated__/CheckoutQuery.graphql";
 
 const CheckoutQuery = graphql`
-  query CheckoutQuery($productId: ID!) {
+  query pageCheckoutQuery($productId: ID!) {
     node(id: $productId) {
       __typename
       ... on Product {

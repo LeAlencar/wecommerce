@@ -1,8 +1,8 @@
 'use client'
 import Link from "next/link"
-import { RegisterForm } from "../../../components/RegisterForm"
-import { cn } from "../../../lib/utils"
-import { buttonVariants } from "../../../components/ui/button"
+import { RegisterForm } from "@/components/RegisterForm"
+import { cn } from "@/lib/utils"
+import { buttonVariants } from "@/components/ui/button"
 
 export default function RegisterPage(): JSX.Element {
   return (

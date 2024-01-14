@@ -28,7 +28,7 @@ export default function Product(props: { product: ProductFragment_product$key })
           <p>R${product.price / 100}</p>
           <div className="flex flex-row">
             <Button className="mt-5 gap-10">
-              <Link href={`/${product.id}/checkout`}>
+              <Link href={`/${product.id}/checkout`} target="_blank">
                 Checkout Link
               </Link>
             </Button>
