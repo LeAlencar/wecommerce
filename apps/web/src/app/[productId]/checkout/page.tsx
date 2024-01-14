@@ -18,7 +18,7 @@ const formSchema = z.object({
   email: z.string().email({
     message: "Email is not valid.",
   }),
-  cpf: z.custom((val) => {
+  cpf: z.custom<string>((val) => {
     return isCPF(val as string)
   }, {
     message: 'CPF não é válido.'
