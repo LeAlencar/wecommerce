@@ -39,6 +39,5 @@ export default function Product(props: { product: ProductFragment_product$key })
         </div>
       </CardFooter>
     </Card>
-
   )
 }

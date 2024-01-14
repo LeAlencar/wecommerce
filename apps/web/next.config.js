@@ -6,6 +6,9 @@ module.exports = {
       language: "typescript",
     },
   },
+  images: {
+    domains: ["images.unsplash.com"],
+  },
   reactStrictMode: true,
   transpilePackages: ["@wecommerce/ui"],
 };

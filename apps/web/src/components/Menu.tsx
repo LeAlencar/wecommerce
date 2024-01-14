@@ -28,7 +28,7 @@ export default function Menu() {
     })
   }
   return (
-    <nav className="flex items-center justify-between flex-wrap bg-gray-800 p-6 fixed w-full z-10 top-0">
+    <nav className="flex items-center justify-between flex-wrap bg-emerald-300 p-6 fixed w-full z-10 top-0">
       <p className="text-white">Wecommerce Inc</p>
       <CreateProductDialog />
       <DropdownMenu>
