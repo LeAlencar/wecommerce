@@ -21,6 +21,7 @@ const formSchema = z.object({
   email: z.string().email({
     message: 'Email must be valid'
   }),
+  pixKey: z.string()
 })
 
 export function RegisterForm(): JSX.Element {
@@ -30,7 +31,8 @@ export function RegisterForm(): JSX.Element {
     defaultValues: {
       username: "",
       password: "",
-      email: ""
+      email: "",
+      pixKey: ""
     },
   })
 
@@ -82,6 +84,19 @@ export function RegisterForm(): JSX.Element {
               <FormLabel>Email</FormLabel>
               <FormControl>
                 <Input placeholder="example@example.com" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="pixKey"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Chave PIX</FormLabel>
+              <FormControl>
+                <Input {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
