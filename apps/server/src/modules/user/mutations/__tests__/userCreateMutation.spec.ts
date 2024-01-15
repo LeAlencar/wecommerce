@@ -33,7 +33,8 @@ it('should create an user', async () => {
   const input = {
     username: 'leandro',
     email: 'heisen@test.com',
-    password: 'awesomepass'
+    password: 'awesomepass',
+    pixKey: 'heisen@test.com'
   };
 
   const variables = {

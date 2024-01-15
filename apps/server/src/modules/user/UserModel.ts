@@ -3,6 +3,7 @@ export interface IUser extends Document {
   username: string;
   email: string;
   password: string;
+  pixKey: string;
 }
 
 const UserSchema = new Schema<IUser>(
@@ -18,6 +19,10 @@ const UserSchema = new Schema<IUser>(
       unique: true
     },
     password: {
+      type: String,
+      required: true
+    },
+    pixKey: {
       type: String,
       required: true
     }

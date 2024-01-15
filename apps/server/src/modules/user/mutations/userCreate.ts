@@ -10,6 +10,9 @@ export default mutationWithClientMutationId({
     username: {
       type: new GraphQLNonNull(GraphQLString)
     },
+    pixKey: {
+      type: new GraphQLNonNull(GraphQLString)
+    },
     email: {
       type: new GraphQLNonNull(GraphQLString)
     },
@@ -17,7 +20,10 @@ export default mutationWithClientMutationId({
       type: new GraphQLNonNull(GraphQLString)
     }
   },
-  mutateAndGetPayload: async ({ username, email, password }, context) => {
+  mutateAndGetPayload: async (
+    { username, email, password, pixKey },
+    context
+  ) => {
     const userExists = await UserModel.findOne({
       email: email.trim().toLowerCase()
     });
@@ -33,7 +39,8 @@ export default mutationWithClientMutationId({
     const user = await new UserModel({
       username,
       email,
-      password: hashPassword
+      password: hashPassword,
+      pixKey
     }).save();
 
     const token = generateJwtToken(user._id);
