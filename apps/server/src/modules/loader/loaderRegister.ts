@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export interface DataLoaders {
-  UserLoader?: ReturnType<typeof import('../user/UserLoader').getLoader>;
-  ProductLoader?: ReturnType<
+  UserLoader: ReturnType<typeof import('../user/UserLoader').getLoader>;
+  ProductLoader: ReturnType<
     typeof import('../product/ProductLoader').getLoader
   >;
+  ChargeLoader: ReturnType<typeof import('../charge/ChargeLoader').getLoader>;
 }
 
 const loaders = {} as any;
