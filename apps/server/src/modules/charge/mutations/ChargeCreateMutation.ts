@@ -31,6 +31,12 @@ export default mutationWithClientMutationId({
       _id: fromGlobalId(product).id
     });
 
+    if (!productExists) {
+      return {
+        error: 'Product does not exists'
+      };
+    }
+
     const productOwner = await UserModel.findOne({
       _id: productExists.user
     });
@@ -38,12 +44,6 @@ export default mutationWithClientMutationId({
     if (!productOwner) {
       return {
         error: 'Product owner does not exists'
-      };
-    }
-
-    if (!productExists) {
-      return {
-        error: 'Product does not exists'
       };
     }
 

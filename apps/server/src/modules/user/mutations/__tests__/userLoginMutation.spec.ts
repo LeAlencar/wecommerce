@@ -21,7 +21,8 @@ it.only('should login a user', async () => {
   const user = await new UserModel({
     email: 'heisen@test.com',
     password: bcrypt.hashSync('awesomepass', 8),
-    username: 'heisen'
+    username: 'heisen',
+    pixKey: 'fake-pix-key'
   }).save();
 
   const query = /* GraphQL */ `

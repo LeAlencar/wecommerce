@@ -1,13 +1,9 @@
-import {
-  GraphQLString,
-  GraphQLNonNull,
-  GraphQLObjectType,
-  GraphQLInt
-} from 'graphql';
+import { GraphQLString, GraphQLNonNull, GraphQLObjectType } from 'graphql';
 import { connectionDefinitions, globalIdField } from 'graphql-relay';
 import { registerTypeLoader, nodeInterface } from '../node/typeRegister';
 import { load } from './ChargeLoader';
-
+import { ProductType } from '../product/ProductType';
+import * as ProductLoader from '../product/ProductLoader';
 export const ChargeType = new GraphQLObjectType({
   name: 'Charge',
   description: 'Charge type',
@@ -30,9 +26,16 @@ export const ChargeType = new GraphQLObjectType({
       resolve: (Charge) => Charge.customerTaxID
     },
     customerEmail: {
-      type: new GraphQLNonNull(GraphQLInt),
+      type: new GraphQLNonNull(GraphQLString),
       description: `Charge's customerEmail`,
       resolve: (Charge) => Charge.customerEmail
+    },
+    product: {
+      type: new GraphQLNonNull(ProductType),
+      description: `Charge's productID`,
+      resolve: async (Charge, _, context) => {
+        return await ProductLoader.load(context, Charge.product);
+      }
     }
   })
 });
