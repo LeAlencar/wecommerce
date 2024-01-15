@@ -51,12 +51,10 @@ export default mutationWithClientMutationId({
         }),
         headers: {
           'content-type': 'application/json',
-          Authorization: process.env.WOOVI_PAY_KEY
+          Authorization: process.env.WOOVI_BAAS_KEY
         }
       }
     );
-
-    console.log(wooviCharge.status);
 
     if (wooviCharge.status !== 200) {
       return {
