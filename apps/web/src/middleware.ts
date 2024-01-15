@@ -6,6 +6,10 @@ export function middleware(request: NextRequest) {
   const url = request.nextUrl.clone();
   const user = cookies().get("userToken");
 
+  if (url.pathname.endsWith("/checkout")) {
+    return NextResponse.next();
+  }
+
   if (
     !user &&
     (url.pathname.startsWith("/login") || url.pathname.startsWith("/register"))
