@@ -43,13 +43,33 @@ export default mutationWithClientMutationId({
       pixKey
     }).save();
 
+    const subAccount = await fetch(
+      `${process.env.WOOVI_BASE_URL}/api/v1/subaccount`,
+      {
+        method: 'POST',
+        body: JSON.stringify({
+          pixKey: pixKey,
+          name: email
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: process.env.WOOVI_BAAS_KEY
+        }
+      }
+    );
+
+    if (subAccount.status !== 200) {
+      return {
+        error: 'Unable to create a new subaccount for this user'
+      };
+    }
+
     const token = generateJwtToken(user._id);
 
     context.setCookie('userToken', token);
 
     return {
       user: user._id,
-      token: token,
       error: null
     };
   },
