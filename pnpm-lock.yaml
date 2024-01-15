@@ -151,6 +151,9 @@ importers:
       graphql-relay:
         specifier: ^0.10.0
         version: 0.10.0(graphql@16.8.1)
+      jest-fetch-mock:
+        specifier: ^3.0.3
+        version: 3.0.3
       jsonwebtoken:
         specifier: ^9.0.2
         version: 9.0.2

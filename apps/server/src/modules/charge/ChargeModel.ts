@@ -7,6 +7,7 @@ export type ICharge = Document & {
   correlationID: string;
   value: number;
   status: string;
+  raw: string;
   product: Schema.Types.ObjectId;
 };
 
@@ -49,6 +50,10 @@ const ChargeSchema = new Schema<ICharge>(
       type: Schema.Types.ObjectId,
       required: true,
       ref: 'Product'
+    },
+    raw: {
+      type: String,
+      description: 'Raw data of this charge'
     }
   },
   {

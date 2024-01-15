@@ -3,6 +3,7 @@ import { UserType } from '../modules/user/UserType';
 import { nodeField, nodesField } from '../modules/node/typeRegister';
 import * as UserLoader from '../modules/user/UserLoader';
 import { productConnectionField } from '../modules/product/ProductConnectionField';
+import { chargeConnectionField } from '../modules/charge/ChargeConnectionField';
 import pkg from '../../package.json';
 
 const QueryType = new GraphQLObjectType({
@@ -12,6 +13,7 @@ const QueryType = new GraphQLObjectType({
     node: nodeField,
     nodes: nodesField,
     ...productConnectionField(),
+    ...chargeConnectionField(),
     me: {
       type: UserType,
       resolve: async (_, args, context) => {
