@@ -4,6 +4,7 @@ import ProductModel from '../../product/ProductModel';
 import ChargeModel from '../ChargeModel';
 import { randomUUID } from 'crypto';
 import UserModel from '../../user/UserModel';
+import { ChargeType } from '../ChargeType';
 export default mutationWithClientMutationId({
   name: 'ChargeCreate',
   description: 'create a new charge',
@@ -48,7 +49,6 @@ export default mutationWithClientMutationId({
     }
 
     const ownerSplit = productExists.price * 0.7;
-    const fee = productExists.price - ownerSplit;
 
     const wooviCharge = await fetch(
       `${process.env.WOOVI_BASE_URL}/api/v1/charge`,
@@ -56,7 +56,7 @@ export default mutationWithClientMutationId({
         method: 'POST',
         body: JSON.stringify({
           correlationID: randomUUID(),
-          value: fee,
+          value: productExists.price,
           customer: {
             name: customerName,
             email: customerEmail,
@@ -78,6 +78,8 @@ export default mutationWithClientMutationId({
     );
 
     if (wooviCharge.status !== 200) {
+      const error = await wooviCharge.json();
+      console.log(error);
       return {
         error:
           'Unable to create a new charge for this product and this customer'
@@ -86,7 +88,7 @@ export default mutationWithClientMutationId({
 
     const wooviChargeData = await wooviCharge.json();
 
-    await new ChargeModel({
+    const charge = await new ChargeModel({
       product: fromGlobalId(product).id,
       customerName,
       customerEmail,
@@ -94,14 +96,13 @@ export default mutationWithClientMutationId({
       correlationID: wooviChargeData.correlationID,
       value: wooviChargeData.charge.value,
       brCode: wooviChargeData.brCode,
-      status: 'WAITING_PAYMENT'
+      status: 'WAITING_PAYMENT',
+      raw: JSON.stringify(wooviChargeData)
     }).save();
 
     return {
       success: 'Charge created with success',
-      brCode: wooviChargeData.brCode,
-      qrCodeImage: wooviChargeData.charge.qrCodeImage,
-      paymentLinkUrl: wooviChargeData.charge.paymentLinkUrl,
+      charge,
       error: null
     };
   },
@@ -110,17 +111,9 @@ export default mutationWithClientMutationId({
       type: GraphQLString,
       resolve: ({ error }) => error
     },
-    brCode: {
-      type: GraphQLString,
-      resolve: ({ brCode }) => brCode
-    },
-    qrCodeImage: {
-      type: GraphQLString,
-      resolve: ({ qrCodeImage }) => qrCodeImage
-    },
-    paymentLinkUrl: {
-      type: GraphQLString,
-      resolve: ({ paymentLinkUrl }) => paymentLinkUrl
+    node: {
+      type: ChargeType,
+      resolve: ({ charge }) => charge
     },
     success: {
       type: GraphQLString,
