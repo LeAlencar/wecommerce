@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<2e1b29e1ae9e5a0a33d5480a93b0bb29>>
+ * @generated SignedSource<<d6c1979943389fdd721b0535ad1d8970>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -15,12 +15,7 @@ export type pageCheckoutQuery$variables = {
 };
 export type pageCheckoutQuery$data = {
   readonly node: {
-    readonly __typename: "Product";
     readonly " $fragmentSpreads": FragmentRefs<"ProductFragment_product">;
-  } | {
-    // This will never be '%other', but we need some
-    // value in case none of the concrete values match.
-    readonly __typename: "%other";
   } | null | undefined;
 };
 export type pageCheckoutQuery = {
@@ -42,14 +37,7 @@ v1 = [
     "name": "id",
     "variableName": "productId"
   }
-],
-v2 = {
-  "alias": null,
-  "args": null,
-  "kind": "ScalarField",
-  "name": "__typename",
-  "storageKey": null
-};
+];
 return {
   "fragment": {
     "argumentDefinitions": (v0/*: any*/),
@@ -65,7 +53,6 @@ return {
         "name": "node",
         "plural": false,
         "selections": [
-          (v2/*: any*/),
           {
             "kind": "InlineFragment",
             "selections": [
@@ -99,7 +86,13 @@ return {
         "name": "node",
         "plural": false,
         "selections": [
-          (v2/*: any*/),
+          {
+            "alias": null,
+            "args": null,
+            "kind": "ScalarField",
+            "name": "__typename",
+            "storageKey": null
+          },
           {
             "alias": null,
             "args": null,
@@ -158,6 +151,6 @@ return {
 };
 })();
 
-(node as any).hash = "1c496d10ff35ae398bac45caf9eb57e4";
+(node as any).hash = "c456b6889852ac461403f9ad122d4a6f";
 
 export default node;

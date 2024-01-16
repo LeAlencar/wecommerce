@@ -3,11 +3,18 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 
+
 interface QrCodeCardProps {
-  brCode: string
+  data: {
+    brCode: string;
+    customerEmail: string;
+    customerName: string;
+    customerTaxID: string;
+  }
 }
 
-export default function QrCodeCard({ brCode }: QrCodeCardProps) {
+
+export default function QrCodeCard({ data }: QrCodeCardProps) {
   const handleCopy = () => {
     // TODO - copy to clipboard
     toast.success('Copiado com sucesso!')
@@ -21,7 +28,7 @@ export default function QrCodeCard({ brCode }: QrCodeCardProps) {
       <CardContent className="flex justify-center items-center">
         <QRCode
           size={256}
-          value={brCode}
+          value={data.brCode}
           viewBox="0 0 256 256"
         />
       </CardContent>

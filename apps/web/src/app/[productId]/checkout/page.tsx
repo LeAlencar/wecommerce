@@ -1,18 +1,28 @@
 'use client'
-import { graphql, useFragment, useLazyLoadQuery } from "react-relay"
+import { graphql, useFragment, useLazyLoadQuery, useMutation } from "react-relay"
 import { useState } from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { isCPF, formatToCPF } from 'brazilian-values';
+import { RotateCw } from "lucide-react";
 import type { ProductFragment_product$key } from "@/relay/__generated__/ProductFragment_product.graphql";
 import { ProductFragment } from "@/relay/ProductFragment";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { CreateCharge } from "@/app/mutations/CreateChargeMutation";
+import type { CreateChargeMutation } from "@/app/mutations/__generated__/CreateChargeMutation.graphql";
 import QrCodeCard from "./QrCodeCard";
 import ProductDisplay from "./ProductDisplay";
 import type { CheckoutQuery as CheckoutQueryType } from "./__generated__/CheckoutQuery.graphql";
+
+interface ChargeData {
+  brCode: string;
+  customerEmail: string;
+  customerName: string;
+  customerTaxID: string;
+}
 
 const formSchema = z.object({
   email: z.string().email({
@@ -28,11 +38,9 @@ const formSchema = z.object({
   }),
 })
 
-
 const CheckoutQuery = graphql`
   query pageCheckoutQuery($productId: ID!) {
     node(id: $productId) {
-      __typename
       ... on Product {
         ...ProductFragment_product
       }
@@ -41,7 +49,7 @@ const CheckoutQuery = graphql`
 `;
 
 export default function CheckoutPage({ params }: { params: { productId: string } }) {
-  const [paymentIntent, setPaymentIntent] = useState(false)
+  const [chargeQrCode, setChargeQrCode] = useState<ChargeData | null>(null)
   const response = useLazyLoadQuery<CheckoutQueryType>(CheckoutQuery, {
     productId: decodeURIComponent(params.productId)
   })
@@ -59,8 +67,23 @@ export default function CheckoutPage({ params }: { params: { productId: string }
       name: "",
     },
   })
+  const [createCharge, loading] = useMutation<CreateChargeMutation>(CreateCharge)
   function onSubmit(data: z.infer<typeof formSchema>) {
-    setPaymentIntent(true)
+    createCharge({
+      variables: {
+        input: {
+          product: product.id,
+          customerEmail: data.email,
+          customerTaxID: data.cpf,
+          customerName: data.name,
+        },
+      },
+      onCompleted({ ChargeCreateMutation }) {
+        if (ChargeCreateMutation?.success && ChargeCreateMutation.node) {
+          setChargeQrCode(ChargeCreateMutation.node)
+        }
+      }
+    })
     console.log(data)
   }
   return (
@@ -71,8 +94,8 @@ export default function CheckoutPage({ params }: { params: { productId: string }
       <div className="flex justify-center h-screen gap-4 bg-slate-100">
         <div className="w-1/2 flex justify-center items-center flex-col">
           {
-            paymentIntent ? (
-              <QrCodeCard brCode="https://google.com" />
+            chargeQrCode ? (
+              <QrCodeCard data={chargeQrCode} />
             ) : (
               <>
                 <h1 className="font-extrabold text-lg mb-5">Digite seus dados para gerar o seu QrCode</h1>
@@ -118,7 +141,7 @@ export default function CheckoutPage({ params }: { params: { productId: string }
                       )}
                     />
                     <Button className="w-96 bg-emerald-300" type="submit">
-                      Generate your QrCode
+                      {loading ? (<RotateCw className="animate-spin" />) : "Generate your QrCode"}
                     </Button>
                   </form>
                 </Form>

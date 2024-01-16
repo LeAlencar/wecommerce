@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<ab5d68af0e44c45d6b3b1ae80b0498d6>>
+ * @generated SignedSource<<0938bd3831a3fe55748fb1d1c86f2fe1>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -13,6 +13,7 @@ export type UserRegisterInput = {
   clientMutationId?: string | null | undefined;
   email: string;
   password: string;
+  pixKey: string;
   username: string;
 };
 export type RegisterMutation$variables = {

@@ -9,6 +9,86 @@ directive @specifiedBy(
 ) on SCALAR
 
 """
+Charge type
+"""
+type Charge implements Node {
+  """
+  The ID of an object
+  """
+  id: ID!
+
+  """
+  Charge brCode
+  """
+  brCode: String!
+
+  """
+  Charge's customerName
+  """
+  customerName: String!
+
+  """
+  Charge's customerTaxID
+  """
+  customerTaxID: String!
+
+  """
+  Charge's customerEmail
+  """
+  customerEmail: String!
+
+  """
+  Charge's productID
+  """
+  product: Product!
+}
+
+"""
+A connection to a list of items.
+"""
+type ChargeConnection {
+  """
+  Information to aid in pagination.
+  """
+  pageInfo: PageInfo!
+
+  """
+  A list of edges.
+  """
+  edges: [ChargeEdge]
+}
+
+input ChargeCreateInput {
+  customerName: String!
+  customerTaxID: String!
+  customerEmail: String!
+  product: String!
+  clientMutationId: String
+}
+
+type ChargeCreatePayload {
+  error: String
+  node: Charge
+  success: String
+  clientMutationId: String
+}
+
+"""
+An edge in a connection.
+"""
+type ChargeEdge {
+  """
+  The item at the end of the edge
+  """
+  node: Charge
+
+  """
+  A cursor for use in pagination
+  """
+  cursor: String!
+}
+
+"""
 Root of ... mutations
 """
 type Mutation {
@@ -25,6 +105,11 @@ type Mutation {
   dele a product
   """
   ProductDeleteMutation(input: ProductDeleteInput!): ProductDeletePayload
+
+  """
+  create a new charge
+  """
+  ChargeCreateMutation(input: ChargeCreateInput!): ChargeCreatePayload
 }
 
 """
@@ -178,6 +263,13 @@ type Query {
     last: Int
     id: String
   ): ProductConnection!
+  charges(
+    after: String
+    first: Int
+    before: String
+    last: Int
+    id: String
+  ): ChargeConnection!
   me: User
   version: String
 }
@@ -226,6 +318,7 @@ type UserLogoutPayload {
 
 input UserRegisterInput {
   username: String!
+  pixKey: String!
   email: String!
   password: String!
   clientMutationId: String
