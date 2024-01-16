@@ -114,8 +114,6 @@ describe('ChargeCreateMutation', () => {
       variableValues: variables
     });
 
-    console.log('result: ', result.data);
-
     expect(result.errors).toBeUndefined();
     expect(result.data.ChargeCreateMutation.error).toBeNull();
     expect(result.data.ChargeCreateMutation.success).toBe(
@@ -210,6 +208,82 @@ describe('ChargeCreateMutation', () => {
 
     expect(result.data.ChargeCreateMutation.error).toBe(
       'Product does not exists'
+    );
+    expect(result.data.ChargeCreateMutation.success).toBeNull();
+  });
+
+  it('should return an error if fetch fails', async () => {
+    const user = await new UserModel({
+      email: 'heisen@test.com',
+      password: bcrypt.hashSync('awesomepass', 8),
+      username: 'heisen',
+      pixKey: 'fake-pix-key'
+    }).save();
+
+    const fakeProduct = await new ProductModel({
+      name: 'fake-product',
+      description: 'fake-description',
+      displayName: 'fake-display-name',
+      price: 100,
+      user: user._id
+    }).save();
+
+    const query = /* GraphQL */ `
+      mutation ChargeCreateMutation($input: ChargeCreateInput!) {
+        ChargeCreateMutation(input: $input) {
+          success
+          error
+          node {
+            brCode
+            customerName
+            customerTaxID
+            customerEmail
+            product {
+              name
+              displayName
+              price
+              description
+            }
+          }
+        }
+      }
+    `;
+
+    const input = {
+      customerName: 'fake-customer',
+      customerTaxID: 'fake-customer-id',
+      customerEmail: 'heisen@test.com',
+      product: toGlobalId('Product', fakeProduct._id)
+    };
+
+    const variables = {
+      input
+    };
+
+    const context = await getContext({
+      user
+    });
+
+    const rootValue = {};
+
+    // POST /api/v1/charge
+    fetchMock.mockResponseOnce(
+      JSON.stringify({ error: 'fake error message' }),
+      { status: 400 }
+    );
+
+    const result = await graphql({
+      schema: schema,
+      source: query,
+      rootValue,
+      contextValue: context,
+      variableValues: variables
+    });
+
+    expect(result.errors).toBeUndefined();
+
+    expect(result.data.ChargeCreateMutation.error).toBe(
+      'Unable to create a new charge for this product and this customer'
     );
     expect(result.data.ChargeCreateMutation.success).toBeNull();
   });
