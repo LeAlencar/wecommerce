@@ -94,9 +94,9 @@ export default mutationWithClientMutationId({
       customerName,
       customerEmail,
       customerTaxID,
-      correlationID: wooviChargeData.correlationID,
+      correlationID: wooviChargeData.charge.correlationID,
       value: wooviChargeData.charge.value,
-      brCode: wooviChargeData.brCode,
+      brCode: wooviChargeData.charge.brCode,
       status: 'WAITING_PAYMENT',
       raw: JSON.stringify(wooviChargeData)
     }).save();

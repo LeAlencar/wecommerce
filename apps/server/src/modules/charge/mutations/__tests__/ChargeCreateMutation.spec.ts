@@ -114,8 +114,9 @@ describe('ChargeCreateMutation', () => {
       variableValues: variables
     });
 
-    expect(result.errors).toBeUndefined();
+    console.log('result: ', result.data);
 
+    expect(result.errors).toBeUndefined();
     expect(result.data.ChargeCreateMutation.error).toBeNull();
     expect(result.data.ChargeCreateMutation.success).toBe(
       'Charge created with success'
