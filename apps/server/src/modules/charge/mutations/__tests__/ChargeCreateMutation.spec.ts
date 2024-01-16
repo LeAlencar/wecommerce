@@ -68,7 +68,7 @@ describe('ChargeCreateMutation', () => {
 
     const rootValue = {};
 
-    const pixQrCodePayload = {
+    const chargePayload = {
       charge: {
         status: 'ACTIVE',
         customer: {
@@ -95,7 +95,7 @@ describe('ChargeCreateMutation', () => {
     };
 
     // POST /api/v1/charge
-    fetchMock.mockResponseOnce(JSON.stringify(pixQrCodePayload));
+    fetchMock.mockResponseOnce(JSON.stringify(chargePayload));
 
     const result = await graphql({
       schema: schema,
@@ -149,7 +149,7 @@ describe('ChargeCreateMutation', () => {
 
     const rootValue = {};
 
-    const pixQrCodePayload = {
+    const chargePayload = {
       charge: {
         status: 'ACTIVE',
         customer: {
@@ -176,7 +176,7 @@ describe('ChargeCreateMutation', () => {
     };
 
     // POST /api/v1/charge
-    fetchMock.mockResponseOnce(JSON.stringify(pixQrCodePayload));
+    fetchMock.mockResponseOnce(JSON.stringify(chargePayload));
 
     const result = await graphql({
       schema: schema,
