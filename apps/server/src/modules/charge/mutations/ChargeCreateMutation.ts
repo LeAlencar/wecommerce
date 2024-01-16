@@ -5,6 +5,8 @@ import ChargeModel from '../ChargeModel';
 import { randomUUID } from 'crypto';
 import UserModel from '../../user/UserModel';
 import { ChargeType } from '../ChargeType';
+import * as ChargeLoader from '../ChargeLoader';
+
 export default mutationWithClientMutationId({
   name: 'ChargeCreate',
   description: 'create a new charge',
@@ -51,7 +53,7 @@ export default mutationWithClientMutationId({
     const ownerSplit = productExists.price * 0.7;
 
     const wooviCharge = await fetch(
-      `${process.env.WOOVI_BASE_URL}/api/v1/charge`,
+      `${process.env.WOOVI_API_URL}/api/v1/charge`,
       {
         method: 'POST',
         body: JSON.stringify({
@@ -76,9 +78,8 @@ export default mutationWithClientMutationId({
         }
       }
     );
-
     if (wooviCharge.status !== 200) {
-      const error = await wooviCharge.json();
+      const error = await wooviCharge.text();
       console.log(error);
       return {
         error:
@@ -102,7 +103,7 @@ export default mutationWithClientMutationId({
 
     return {
       success: 'Charge created with success',
-      charge,
+      id: charge._id,
       error: null
     };
   },
@@ -113,7 +114,9 @@ export default mutationWithClientMutationId({
     },
     node: {
       type: ChargeType,
-      resolve: ({ charge }) => charge
+      resolve: async ({ id }, _, context) => {
+        return await ChargeLoader.load(context, id);
+      }
     },
     success: {
       type: GraphQLString,
