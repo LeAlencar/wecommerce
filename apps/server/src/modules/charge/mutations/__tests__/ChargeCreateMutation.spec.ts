@@ -43,10 +43,19 @@ describe('ChargeCreateMutation', () => {
       mutation ChargeCreateMutation($input: ChargeCreateInput!) {
         ChargeCreateMutation(input: $input) {
           success
-          brCode
-          qrCodeImage
-          paymentLinkUrl
           error
+          node {
+            brCode
+            customerName
+            customerTaxID
+            customerEmail
+            product {
+              name
+              displayName
+              price
+              description
+            }
+          }
         }
       }
     `;
@@ -104,8 +113,10 @@ describe('ChargeCreateMutation', () => {
       contextValue: context,
       variableValues: variables
     });
-    expect(result.errors).toBeUndefined();
 
+    console.log('result: ', result.data);
+
+    expect(result.errors).toBeUndefined();
     expect(result.data.ChargeCreateMutation.error).toBeNull();
     expect(result.data.ChargeCreateMutation.success).toBe(
       'Charge created with success'
@@ -124,10 +135,19 @@ describe('ChargeCreateMutation', () => {
       mutation ChargeCreateMutation($input: ChargeCreateInput!) {
         ChargeCreateMutation(input: $input) {
           success
-          brCode
-          qrCodeImage
-          paymentLinkUrl
           error
+          node {
+            brCode
+            customerName
+            customerTaxID
+            customerEmail
+            product {
+              name
+              displayName
+              price
+              description
+            }
+          }
         }
       }
     `;
@@ -185,7 +205,6 @@ describe('ChargeCreateMutation', () => {
       contextValue: context,
       variableValues: variables
     });
-    console.log(result);
 
     expect(result.errors).toBeUndefined();
 
