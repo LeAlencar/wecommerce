@@ -53,7 +53,7 @@ export default mutationWithClientMutationId({
     const ownerSplit = productExists.price * 0.7;
 
     const wooviCharge = await fetch(
-      `${process.env.WOOVI_API_URL}/api/v1/charge`,
+      `${process.env.WOOVI_BASE_URL}/api/v1/charge`,
       {
         method: 'POST',
         body: JSON.stringify({
@@ -74,7 +74,7 @@ export default mutationWithClientMutationId({
         }),
         headers: {
           'content-type': 'application/json',
-          Authorization: process.env.WOOVI_BAAS_KEY
+          Authorization: process.env.WOOVI_API_KEY
         }
       }
     );
