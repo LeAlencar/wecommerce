@@ -3,6 +3,7 @@
 'use client'
 import { useRouter } from "next/navigation";
 import { useMutation } from "react-relay";
+import Link from "next/link";
 import { UserLogout } from "../app/mutations/LogoutMutation";
 import type { LogoutMutation } from "../app/mutations/__generated__/LogoutMutation.graphql";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
@@ -29,7 +30,7 @@ export default function Menu() {
   }
   return (
     <nav className="flex items-center justify-between flex-wrap bg-emerald-300 p-6 fixed w-full z-10 top-0">
-      <p className="text-white">Wecommerce Inc</p>
+      <Link className="text-white" href='/'>Wecommerce Inc</Link>
       <CreateProductDialog />
       <DropdownMenu>
         <DropdownMenuTrigger>
