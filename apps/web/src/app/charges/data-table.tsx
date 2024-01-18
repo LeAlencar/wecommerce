@@ -1,7 +1,7 @@
-//@ts-nocheck
+
 "use client"
 import type {
-  ColumnDef, ColumnFiltersState
+  ColumnFiltersState
 } from "@tanstack/react-table";
 import {
   flexRender,
@@ -10,6 +10,7 @@ import {
   getPaginationRowModel,
   useReactTable,
 } from "@tanstack/react-table"
+import type { ReactNode } from "react";
 import { useState } from "react";
 import {
   Table,
@@ -21,16 +22,16 @@ import {
 } from "@/components/ui/table"
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import type { columns } from "./columns";
 
-interface DataTableProps<TData, TValue> {
-  columns: ColumnDef<TData, TValue>[]
-  data: TData[]
+interface DataTableProps {
+  columns: typeof columns
+  data: any
 }
-
-export function DataTable<TData, TValue>({
+export function DataTable({
   columns,
   data,
-}: DataTableProps<TData, TValue>) {
+}: DataTableProps) {
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>(
     []
   )
@@ -55,7 +56,7 @@ export function DataTable<TData, TValue>({
             table.getColumn("productName")?.setFilterValue(event.target.value)
           }
           placeholder="Filter charges by product name..."
-          value={table.getColumn("productName")?.getFilterValue() ?? ""}
+          value={table.getColumn("productName")?.getFilterValue() ? table.getColumn("productName")?.getFilterValue() as string : ""}
         />
       </div>
       <div className="rounded-md border">
@@ -71,7 +72,7 @@ export function DataTable<TData, TValue>({
                         : flexRender(
                           header.column.columnDef.header,
                           header.getContext()
-                        )}
+                        ) as ReactNode}
                     </TableHead>
                   )
                 })}
@@ -87,7 +88,7 @@ export function DataTable<TData, TValue>({
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
-                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                      {flexRender(cell.column.columnDef.cell, cell.getContext()) as ReactNode}
                     </TableCell>
                   ))}
                 </TableRow>

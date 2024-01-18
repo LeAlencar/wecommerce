@@ -40,14 +40,12 @@ export default function ChargesPage() {
     }
   })
 
-
   return (
     <>
       <Menu />
       <div className="container mx-auto py-10 mt-28">
         <h1 className="font-extrabold text-3xl">All Charges</h1>
-        { /* @ts-ignore */}
-        {chargesData ? <DataTable columns={columns} data={chargesData} /> : null}
+        <DataTable columns={columns} data={chargesData ?? []} />
       </div>
     </>
   )
