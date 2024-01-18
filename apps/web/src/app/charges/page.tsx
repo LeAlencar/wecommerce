@@ -1,9 +1,9 @@
 'use client'
 import { graphql, useLazyLoadQuery } from "react-relay";
-import type { pageChargesQuery } from "@/app/charges/__generated__/pageChargesQuery.graphql.ts";
 import Menu from "@/components/Menu";
 import { DataTable } from "./data-table";
 import { columns } from "./columns";
+import type { pageChargesQuery } from "./__generated__/pageChargesQuery.graphql";
 
 export default function ChargesPage() {
   const response = useLazyLoadQuery<pageChargesQuery>(
