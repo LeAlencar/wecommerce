@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { isCPF, formatToCPF } from 'brazilian-values';
 import { RotateCw } from "lucide-react";
+import { toast } from "sonner";
 import type { ProductFragment_product$key } from "@/relay/__generated__/ProductFragment_product.graphql";
 import { ProductFragment } from "@/relay/ProductFragment";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
@@ -80,8 +81,9 @@ export default function CheckoutPage({ params }: { params: { productId: string }
       },
       onCompleted({ ChargeCreateMutation }) {
         if (ChargeCreateMutation?.success && ChargeCreateMutation.node) {
-          setChargeQrCode(ChargeCreateMutation.node)
+          setChargeQrCode(ChargeCreateMutation.node); return;
         }
+        toast.error("Erro ao criar cobrança.");
       }
     })
     console.log(data)

@@ -74,7 +74,7 @@ export default mutationWithClientMutationId({
         }),
         headers: {
           'content-type': 'application/json',
-          Authorization: process.env.WOOVI_API_KEY
+          Authorization: process.env.WOOVI_BAAS_KEY
         }
       }
     );
