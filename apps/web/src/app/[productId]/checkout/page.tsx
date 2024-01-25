@@ -95,60 +95,59 @@ export default function CheckoutPage({ params }: { params: { productId: string }
       </nav>
       <div className="flex flex-col xl:flex-row justify-center h-full xl:h-screen gap-4 bg-slate-100">
         <div className="xl:w-1/2 flex justify-center items-center flex-col">
-          {
-            true ? (
-              <QrCodeCard data={chargeQrCode} />
-            ) : (
-              <>
-                <h1 className="font-extrabold text-lg mb-5">Digite seus dados para gerar o seu QrCode</h1>
-                <Form {...form}>
-                  <form className="mt-20 space-y-8 w-96" onSubmit={form.handleSubmit(onSubmit)}>
-                    <FormField
-                      control={form.control}
-                      name="email"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Email</FormLabel>
-                          <FormControl>
-                            <Input placeholder="shadcn" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="cpf"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>CPF</FormLabel>
-                          <FormControl>
-                            <Input type="text" {...field} maxLength={14} value={formatToCPF(field.value)} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="name"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Name</FormLabel>
-                          <FormControl>
-                            <Input type="text" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <Button className="w-96 bg-emerald-300" type="submit">
-                      {loading ? (<RotateCw className="animate-spin" />) : "Generate your QrCode"}
-                    </Button>
-                  </form>
-                </Form>
-              </>
-            )
+          {chargeQrCode ? (
+            <QrCodeCard data={chargeQrCode} />
+          ) : (
+            <>
+              <h1 className="font-extrabold text-lg mb-5">Digite seus dados para gerar o seu QrCode</h1>
+              <Form {...form}>
+                <form className="mt-20 xl:mt-5 space-y-8 w-96" onSubmit={form.handleSubmit(onSubmit)}>
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Email</FormLabel>
+                        <FormControl>
+                          <Input placeholder="shadcn" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="cpf"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>CPF</FormLabel>
+                        <FormControl>
+                          <Input type="text" {...field} maxLength={14} value={formatToCPF(field.value)} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="name"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Name</FormLabel>
+                        <FormControl>
+                          <Input type="text" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <Button className="w-96 bg-emerald-300" type="submit">
+                    {loading ? (<RotateCw className="animate-spin" />) : "Generate your QrCode"}
+                  </Button>
+                </form>
+              </Form>
+            </>
+          )
           }
 
         </div>

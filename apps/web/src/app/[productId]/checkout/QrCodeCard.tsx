@@ -15,8 +15,9 @@ interface QrCodeCardProps {
 
 
 export default function QrCodeCard({ data }: QrCodeCardProps) {
-  const handleCopy = () => {
+  const handleCopy = async () => {
     // TODO - copy to clipboard
+    await navigator.clipboard.writeText(data.brCode)
     toast.success('Copiado com sucesso!')
   }
   return (
@@ -28,7 +29,7 @@ export default function QrCodeCard({ data }: QrCodeCardProps) {
       <CardContent className="flex justify-center items-center">
         <QRCode
           size={256}
-          value="https://wecommerce.com.br"
+          value={data.brCode}
           viewBox="0 0 256 256"
         />
       </CardContent>
