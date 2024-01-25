@@ -93,16 +93,16 @@ export default function CheckoutPage({ params }: { params: { productId: string }
       <nav className="flex items-center justify-center flex-wrap bg-emerald-300 p-6 fixed w-full top-0">
         <p className="text-white">Wecommerce Inc.</p>
       </nav>
-      <div className="flex justify-center h-screen gap-4 bg-slate-100">
-        <div className="w-1/2 flex justify-center items-center flex-col">
+      <div className="flex flex-col xl:flex-row justify-center h-full xl:h-screen gap-4 bg-slate-100">
+        <div className="xl:w-1/2 flex justify-center items-center flex-col">
           {
-            chargeQrCode ? (
+            true ? (
               <QrCodeCard data={chargeQrCode} />
             ) : (
               <>
                 <h1 className="font-extrabold text-lg mb-5">Digite seus dados para gerar o seu QrCode</h1>
                 <Form {...form}>
-                  <form className="space-y-8 w-96" onSubmit={form.handleSubmit(onSubmit)}>
+                  <form className="mt-20 space-y-8 w-96" onSubmit={form.handleSubmit(onSubmit)}>
                     <FormField
                       control={form.control}
                       name="email"
@@ -152,7 +152,7 @@ export default function CheckoutPage({ params }: { params: { productId: string }
           }
 
         </div>
-        <div className="w-1/2 flex justify-center items-center">
+        <div className="xl:w-1/2 flex justify-center items-center">
           <ProductDisplay product={product} />
         </div>
       </div>
