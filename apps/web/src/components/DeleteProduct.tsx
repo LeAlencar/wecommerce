@@ -36,7 +36,7 @@ export default function DeleteProductAlert({ productId }: { productId: string })
   return (
     <div className="mt-5">
       <AlertDialog>
-        <AlertDialogTrigger className="bg-destructive rounded-md px-3 py-2 text-white">
+        <AlertDialogTrigger className="bg-destructive rounded-md px-3 py-2 text-white w-full">
           Delete
         </AlertDialogTrigger>
         <AlertDialogContent>

@@ -67,7 +67,7 @@ export function CreateProductDialog() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="default">Create a new product</Button>
+        <Button className="bg-emerald-300" variant="default">Create a new product</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[500px]">
         <DialogHeader>
