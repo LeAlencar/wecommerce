@@ -4,7 +4,7 @@ import Link from "next/link";
 import { ExternalLink } from "lucide-react";
 import { ProductFragment } from "../relay/ProductFragment";
 import type { ProductFragment_product$key } from "../relay/__generated__/ProductFragment_product.graphql";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "./ui/card";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader } from "./ui/card";
 import { Button } from "./ui/button";
 import DeleteProductAlert from "./DeleteProduct";
 
@@ -16,25 +16,24 @@ export default function Product(props: { product: ProductFragment_product$key })
   )
 
   return (
-    <Card>
+    <Card className="flex flex-col bg-white rounded-lg shadow-md dark:bg-gray-800">
       <CardHeader>
-        <CardTitle>{product.displayName}</CardTitle>
-        <CardDescription>{product.name}</CardDescription>
+        <h1 className="font-extrabold text-2xl">{product.displayName}</h1>
       </CardHeader>
-      <CardContent>
-        <p>{product.description}</p>
+      <CardContent className="p-4 flex-1 flex flex-col justify-between">
+        <p>R${product.price / 100}</p>
       </CardContent>
-      <CardFooter className="gap-5">
-        <div className="flex flex-col justify-center">
-          <p>R${product.price / 100}</p>
-          <div className="flex flex-row">
-            <Button className="mt-5 ">
-              <Link className="flex flex-row gap-3 text-center items-center" href={`/${product.id}/checkout`} target="_blank">
-                Checkout Link
-                <ExternalLink />
-              </Link>
-            </Button>
-          </div>
+      <CardDescription className="p-4 flex-1 flex flex-col justify-between">
+        <h3>{product.description}</h3>
+      </CardDescription>
+      <CardFooter>
+        <div className="flex flex-col justify-between w-full">
+          <Button className="mt-5">
+            <Link className="flex flex-row gap-3 text-center items-center" href={`/${product.id}/checkout`} target="_blank">
+              Checkout Link
+              <ExternalLink />
+            </Link>
+          </Button>
           <DeleteProductAlert productId={product.id} />
         </div>
       </CardFooter>
