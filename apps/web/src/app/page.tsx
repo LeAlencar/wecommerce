@@ -61,7 +61,7 @@ export default function Component() {
             <span className="sr-only">Home</span>
           </Link>
           <div className="flex-1">
-            <h1 className="font-semibold text-lg">Products</h1>
+            <h1 className="font-semibold text-lg">Home</h1>
           </div>
           <div className="flex flex-1 items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
             {/* <form className="ml-auto flex-1 sm:flex-initial">
