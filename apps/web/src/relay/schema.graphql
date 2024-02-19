@@ -38,6 +38,11 @@ type Charge implements Node {
   customerEmail: String!
 
   """
+  Charge's status
+  """
+  status: String!
+
+  """
   Charge's productID
   """
   product: Product!

@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<8e33a17a13eede5dbfccc89afc79a1fc>>
+ * @generated SignedSource<<f0d8c77dd42c594af0e90209d392d343>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -20,6 +20,7 @@ export type pageChargesQuery$data = {
           readonly name: string;
           readonly price: number;
         };
+        readonly status: string;
       } | null | undefined;
     } | null | undefined> | null | undefined;
   };
@@ -48,31 +49,38 @@ v2 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
-  "name": "name",
+  "name": "status",
   "storageKey": null
 },
 v3 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
-  "name": "price",
+  "name": "name",
   "storageKey": null
 },
 v4 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
-  "name": "__typename",
+  "name": "price",
   "storageKey": null
 },
 v5 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
-  "name": "cursor",
+  "name": "__typename",
   "storageKey": null
 },
 v6 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "cursor",
+  "storageKey": null
+},
+v7 = {
   "alias": null,
   "args": null,
   "concreteType": "PageInfo",
@@ -97,14 +105,14 @@ v6 = {
   ],
   "storageKey": null
 },
-v7 = [
+v8 = [
   {
     "kind": "Literal",
     "name": "first",
     "value": 100
   }
 ],
-v8 = {
+v9 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
@@ -144,6 +152,7 @@ return {
                 "selections": [
                   (v0/*: any*/),
                   (v1/*: any*/),
+                  (v2/*: any*/),
                   {
                     "alias": null,
                     "args": null,
@@ -152,20 +161,20 @@ return {
                     "name": "product",
                     "plural": false,
                     "selections": [
-                      (v2/*: any*/),
-                      (v3/*: any*/)
+                      (v3/*: any*/),
+                      (v4/*: any*/)
                     ],
                     "storageKey": null
                   },
-                  (v4/*: any*/)
+                  (v5/*: any*/)
                 ],
                 "storageKey": null
               },
-              (v5/*: any*/)
+              (v6/*: any*/)
             ],
             "storageKey": null
           },
-          (v6/*: any*/)
+          (v7/*: any*/)
         ],
         "storageKey": null
       }
@@ -181,7 +190,7 @@ return {
     "selections": [
       {
         "alias": null,
-        "args": (v7/*: any*/),
+        "args": (v8/*: any*/),
         "concreteType": "ChargeConnection",
         "kind": "LinkedField",
         "name": "charges",
@@ -205,6 +214,7 @@ return {
                 "selections": [
                   (v0/*: any*/),
                   (v1/*: any*/),
+                  (v2/*: any*/),
                   {
                     "alias": null,
                     "args": null,
@@ -213,28 +223,28 @@ return {
                     "name": "product",
                     "plural": false,
                     "selections": [
-                      (v2/*: any*/),
                       (v3/*: any*/),
-                      (v8/*: any*/)
+                      (v4/*: any*/),
+                      (v9/*: any*/)
                     ],
                     "storageKey": null
                   },
-                  (v8/*: any*/),
-                  (v4/*: any*/)
+                  (v9/*: any*/),
+                  (v5/*: any*/)
                 ],
                 "storageKey": null
               },
-              (v5/*: any*/)
+              (v6/*: any*/)
             ],
             "storageKey": null
           },
-          (v6/*: any*/)
+          (v7/*: any*/)
         ],
         "storageKey": "charges(first:100)"
       },
       {
         "alias": null,
-        "args": (v7/*: any*/),
+        "args": (v8/*: any*/),
         "filters": null,
         "handle": "connection",
         "key": "ChargeList_charges",
@@ -244,7 +254,7 @@ return {
     ]
   },
   "params": {
-    "cacheID": "1820a1031476f1c01011fbf8a35acea2",
+    "cacheID": "cc94d4e6150a08ffdb02e93e8471f4de",
     "id": null,
     "metadata": {
       "connection": [
@@ -260,11 +270,11 @@ return {
     },
     "name": "pageChargesQuery",
     "operationKind": "query",
-    "text": "query pageChargesQuery {\n  charges(first: 100) {\n    edges {\n      node {\n        brCode\n        customerEmail\n        product {\n          name\n          price\n          id\n        }\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n"
+    "text": "query pageChargesQuery {\n  charges(first: 100) {\n    edges {\n      node {\n        brCode\n        customerEmail\n        status\n        product {\n          name\n          price\n          id\n        }\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "7d7aac60bdd9bc951889f092e0822d57";
+(node as any).hash = "e770b3b026d2b793a64ef806022c134c";
 
 export default node;
