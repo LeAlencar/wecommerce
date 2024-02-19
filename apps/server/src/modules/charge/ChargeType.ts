@@ -30,6 +30,11 @@ export const ChargeType = new GraphQLObjectType({
       description: `Charge's customerEmail`,
       resolve: (Charge) => Charge.customerEmail
     },
+    status: {
+      type: new GraphQLNonNull(GraphQLString),
+      description: `Charge's status`,
+      resolve: (Charge) => Charge.status
+    },
     product: {
       type: new GraphQLNonNull(ProductType),
       description: `Charge's productID`,
