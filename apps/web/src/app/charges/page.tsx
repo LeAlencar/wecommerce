@@ -103,7 +103,7 @@ export default function ChargesPage() {
             <MenuDrawer />
           </Link>
           <div className="flex-1">
-            <h1 className="font-semibold text-lg">Home</h1>
+            <h1 className="font-semibold text-lg">Charges</h1>
           </div>
           <div className="flex flex-1 items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
             {/* <form className="ml-auto flex-1 sm:flex-initial">
