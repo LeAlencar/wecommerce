@@ -1,8 +1,8 @@
 //@ts-nocheck
 'use client'
-import * as React from "react"
 import Link from "next/link"
 import { Home, Package2Icon, PackageSearch, Settings, ShoppingCart, UsersRound } from "lucide-react"
+import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import {
   Drawer,
@@ -15,11 +15,8 @@ import {
 } from "@/components/ui/drawer"
 
 
-export function DrawerDialogDemo() {
-  const [open, setOpen] = React.useState(true)
-
-
-
+export function MenuDrawer() {
+  const [open, setOpen] = useState(false)
 
   return (
     <Drawer direction="left" dismissible={false} onOpenChange={setOpen} open={open} >

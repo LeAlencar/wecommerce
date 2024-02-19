@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { Home, Package2Icon, PackageSearch, Settings, ShoppingCart, UsersRound } from "lucide-react"
 import ProductsDashboard from "@/components/ProductsDashboard"
-import { DrawerDialogDemo } from "@/components/MenuDrawer"
+import { MenuDrawer } from "@/components/MenuDrawer"
 
 export default function Component() {
   return (
@@ -58,7 +58,7 @@ export default function Component() {
       <div className="flex flex-col">
         <header className="flex h-14 lg:h-[60px] items-center gap-4 border-b bg-gray-100/40 px-6 dark:bg-gray-800/40">
           <Link className="lg:hidden" href="#">
-            <DrawerDialogDemo />
+            <MenuDrawer />
           </Link>
           <div className="flex-1">
             <h1 className="font-semibold text-lg">Home</h1>
