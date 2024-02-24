@@ -47,7 +47,7 @@ export default function ChargesPage() {
 
   return (
 
-    <div className="grid min-h-screen w-full overflow-hidden lg:grid-cols-[280px_1fr]">
+    <div className="grid min-h-screen overflow-hidden w-full lg:grid-cols-[280px_1fr]">
       <div className="hidden border-r bg-gray-100/40 lg:block dark:bg-gray-800/40">
         <div className="flex flex-col gap-2">
           <div className="flex h-[60px] items-center px-6">
@@ -97,7 +97,7 @@ export default function ChargesPage() {
           </div>
         </div>
       </div>
-      <div className="flex flex-col">
+      <div className="flex flex-col overflow-x-auto">
         <header className="flex h-14 lg:h-[60px] items-center gap-4 border-b bg-gray-100/40 px-6 dark:bg-gray-800/40">
           <Link className="lg:hidden" href="#">
             <MenuDrawer />
@@ -118,18 +118,17 @@ export default function ChargesPage() {
             </form> */}
           </div>
         </header>
-        <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-6">
-          <div className="p-2">
+        <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-6 overflow-auto">
+          <div className="p-2 overflow-auto">
             <Suspense fallback={<DashboardSkeleton />}>
               <h1 className="font-extrabold text-3xl">All Charges</h1>
-              <DataTable columns={columns} data={chargesData ?? []} />
+              <div className="overflow-x-auto">
+                <DataTable columns={columns} data={chargesData ?? []} />
+              </div>
             </Suspense>
           </div>
         </main>
       </div>
     </div>
-
-
-
   )
 }
